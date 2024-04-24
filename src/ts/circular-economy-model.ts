@@ -207,41 +207,32 @@ class CircularEconomyModel extends Model<
     const phonesInUseExcess = Math.max(phonesInUse - phoneGoal, 0);
     const abandon =
       abandonRate * phonesInUse + abandonExcessRate * phonesInUseExcess;
-    const inflowIncentiveSumForPhonesInUse =
-      reuseIncentive +
-      repairIncentive +
-      refurbishmentIncentive +
-      newlyProducedPhoneIncentive;
     const goBroken = breakRate * phonesInUse;
     const demandForPhones = Math.max(
       0,
       phoneGoal - phonesInUse + goBroken + abandon,
     );
-    const demandForNewlyProducedPhones =
-      (newlyProducedPhoneIncentive / inflowIncentiveSumForPhonesInUse) *
-      demandForPhones;
+    const demandForNewlyProducedPhones = Math.max(
+      0,
+      demandForPhones -
+        (supplyOfRepairedPhones +
+          supplyOfRefurbishedPhones +
+          supplyOfHibernatingPhones),
+    );
     const acquireNewlyProduced =
       acquireRate *
       Math.min(supplyOfNewlyProducedPhones, demandForNewlyProducedPhones);
-    const demandForRefurbishedPhones =
-      (refurbishmentIncentive / inflowIncentiveSumForPhonesInUse) *
-      demandForPhones;
     const acquireRefurbished =
-      acquireRate *
-      Math.min(demandForRefurbishedPhones, supplyOfRefurbishedPhones);
-    const demandForRepairedPhones =
-      (repairIncentive / inflowIncentiveSumForPhonesInUse) * demandForPhones;
+      acquireRate * Math.min(demandForPhones, supplyOfRefurbishedPhones);
     const acquireRepaired =
-      acquireRate * Math.min(demandForRepairedPhones, supplyOfRepairedPhones);
+      acquireRate * Math.min(demandForPhones, supplyOfRepairedPhones);
     const supplyOfHibernatingPhonesForReuse =
       (reuseIncentive /
         (reuseIncentive + refurbishmentIncentive + disposeIncentive)) *
       supplyOfHibernatingPhones;
-    const demandForReusedPhones =
-      (reuseIncentive / inflowIncentiveSumForPhonesInUse) * demandForPhones;
     const acquireUsed =
       acquireRate *
-      Math.min(supplyOfHibernatingPhonesForReuse, demandForReusedPhones);
+      Math.min(supplyOfHibernatingPhonesForReuse, demandForPhones);
     const capacityOfNewlyProducedPhonesAdjustment =
       capacityAdjustmentRate *
       (demandForNewlyProducedPhones - capacityOfNewlyProducedPhones);
@@ -257,6 +248,14 @@ class CircularEconomyModel extends Model<
     const capacityOfRecycledMaterialsAdjustment =
       capacityAdjustmentRate *
       (demandForRecycledMaterials - capacityOfRecycledMaterials);
+    const inflowIncentiveSumForPhonesInUse =
+      reuseIncentive +
+      repairIncentive +
+      refurbishmentIncentive +
+      newlyProducedPhoneIncentive;
+    const demandForRefurbishedPhones =
+      (refurbishmentIncentive / inflowIncentiveSumForPhonesInUse) *
+      demandForPhones;
     const capacityOfRefurbishedPhonesAdjustment =
       capacityAdjustmentRate *
       (demandForRefurbishedPhones - capacityOfRefurbishedPhones);
@@ -274,15 +273,12 @@ class CircularEconomyModel extends Model<
       (landfillIncentive / (recyclingIncentive + landfillIncentive)) *
       supplyOfDisposedPhones;
     const landfill = landfillRate * supplyOfDisposedPhonesForLandfilling;
-    const demandForNaturalResources =
-      (naturalResourcesIncentive /
-        (naturalResourcesIncentive + recyclingIncentive)) *
-      demandForResources;
     const produceFromNaturalResources =
-      newPhoneProductionRate * demandForNaturalResources;
+      newPhoneProductionRate *
+      Math.max(0, demandForResources - supplyOfRecycledMaterials);
     const produceFromRecycledMaterials =
       newPhoneProductionRate *
-      Math.min(demandForRecycledMaterials, supplyOfRecycledMaterials);
+      Math.min(demandForResources, supplyOfRecycledMaterials);
     const supplyOfDisposedPhonesForRecycling =
       (recyclingIncentive / (recyclingIncentive + landfillIncentive)) *
       supplyOfDisposedPhones;
@@ -311,18 +307,25 @@ class CircularEconomyModel extends Model<
         supplyOfHibernatingPhonesForRefurbishment,
         demandForRefurbishment,
       );
-    const supplyOfBrokenPhonesForRepair =
-      (repairIncentive / (repairIncentive + disposeIncentive)) *
-      supplyOfBrokenPhones;
     const demandForRepair = Math.max(
       capacityOfRepairedPhones - supplyOfRepairedPhones + acquireRepaired,
       0,
     );
-    const repair =
-      repairRate * Math.min(supplyOfBrokenPhonesForRepair, demandForRepair);
+    const repair = repairRate * Math.min(supplyOfBrokenPhones, demandForRepair);
+    const demandForRepairedPhones =
+      (repairIncentive / inflowIncentiveSumForPhonesInUse) * demandForPhones;
     const repairShopCapcityAdjustment =
       capacityAdjustmentRate *
       (demandForRepairedPhones - capacityOfRepairedPhones);
+    const demandForNaturalResources =
+      (naturalResourcesIncentive /
+        (naturalResourcesIncentive + recyclingIncentive)) *
+      demandForResources;
+    const demandForReusedPhones =
+      (reuseIncentive / inflowIncentiveSumForPhonesInUse) * demandForPhones;
+    const supplyOfBrokenPhonesForRepair =
+      (repairIncentive / (repairIncentive + disposeIncentive)) *
+      supplyOfBrokenPhones;
 
     const variables = {
       demandForNaturalResources,
