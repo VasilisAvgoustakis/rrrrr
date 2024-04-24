@@ -47,13 +47,11 @@ const format = (score: number) => `${(score * 100).toFixed(fractionDigits)}%`;
       <template v-for="{ score, primaryLabel, secondaryLabel } in scores">
         <tr>
           <td class="label-column">
-            <span class="primary-text">{{ primaryLabel.value }}&nbsp;</span
-            ><br /><span class="secondary-text">{{
-              secondaryLabel.value
-            }}</span>
+            <div class="primary-text">{{ primaryLabel.value }}&nbsp;</div>
+            <div class="secondary-text">{{ secondaryLabel.value }}</div>
           </td>
           <td class="primary-text score-column">
-            <span class="score-value">{{ format(score.value) }}</span>
+            <div class="score-value">{{ format(score.value) }}</div>
           </td>
         </tr>
       </template>
@@ -71,9 +69,10 @@ const format = (score: number) => `${(score * 100).toFixed(fractionDigits)}%`;
   background-color: black;
   border-radius: 50%;
   color: white;
-  font-size: 24px;
+  font-size: 21px;
   line-height: 1.2;
   text-transform: uppercase;
+  white-space: pre;
   position: absolute;
 }
 
