@@ -73,7 +73,7 @@
         </mxGeometry>
       </mxCell>
     </Flow>
-    <Flow name="repair" Note="" FlowRate="[Repair rate]*Min([Supply of broken phones],[Demand for repair])" OnlyPositive="false" TimeIndependent="false" Units="Unitless" MaxConstraintUsed="false" MinConstraintUsed="false" MaxConstraint="100" MinConstraint="0" ShowSlider="false" SliderMax="100" SliderMin="0" SliderStep="" oldId="127" id="127">
+    <Flow name="repair" Note="" FlowRate="[Repair rate]*Min([Supply of broken phones for repair],[Demand for repair])" OnlyPositive="false" TimeIndependent="false" Units="Unitless" MaxConstraintUsed="false" MinConstraintUsed="false" MaxConstraint="100" MinConstraint="0" ShowSlider="false" SliderMax="100" SliderMin="0" SliderStep="" oldId="127" id="127">
       <mxCell style="flow;strokeWidth=6;strokeColor=#99CC00;fontSize=16;fontColor=#339966;endArrow=open;fontStyle=1;fillColor=none;labelBackgroundColor=none;startArrow=none;startFill=0;" parent="1" source="102" target="93" edge="1">
         <mxGeometry width="100" height="100" as="geometry">
           <mxPoint x="1000" y="360" as="sourcePoint" />
