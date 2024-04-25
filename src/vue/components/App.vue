@@ -186,11 +186,11 @@ onMounted(() => {
         class="pointer-events-fallthrough"
       ></TuioMarkerPanel>
     </div>
+    <ResetTimeoutOverlay v-if="appStore.autoReset" />
     <ControlPanel
       @keydown="$event.stopPropagation()"
       :disabled="!enableControlPanel"
     />
-    <ResetTimeoutOverlay />
   </ScaledLetterBox>
 </template>
 

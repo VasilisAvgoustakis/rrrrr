@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted, onUnmounted } from 'vue';
 import { useIntervalFn } from '@vueuse/core';
-
-import type { Condition } from '../../ts/util/record-condition';
 
 import { useConfigStore } from '../../ts/stores/config';
 import { useModelStore } from '../../ts/stores/model';
@@ -18,24 +16,33 @@ const remainingSeconds = ref(-1);
 
 const resetCondition = compile(autoResetConfig.condition);
 
+let unwatch = () => {};
+let stopCountdown = () => {};
+
 function watchModel() {
-  const unwatch = watch(modelStore.record, (record) => {
+  unwatch = watch(modelStore.record, (record) => {
     if (resetCondition(record)) {
       unwatch();
       remainingSeconds.value = Math.round(autoResetConfig.timeoutSeconds);
-      const { pause: stopCountdown } = useIntervalFn(() => {
+      stopCountdown = useIntervalFn(() => {
         remainingSeconds.value -= 1;
         if (remainingSeconds.value === 0) {
           stopCountdown();
           modelStore.reset();
           watchModel();
         }
-      });
+      }).pause;
     }
   });
 }
 
-watchModel();
+onMounted(watchModel);
+
+onUnmounted(() => {
+  unwatch();
+  stopCountdown();
+  remainingSeconds.value = -1;
+});
 </script>
 
 <template>
