@@ -10,6 +10,7 @@ const toggleFullscreenBtnId = `btn-toggle-playing-${uuidv4()}`;
 const toggleDeveloperModeBtnId = `btn-toggle-playing-${uuidv4()}`;
 const toggleHighlightDerivativesBtnId = `btn-toggle-playing-${uuidv4()}`;
 const toggleMarkerSlotLabelsBtnId = `btn-toggle-marker-slot-labels-${uuidv4()}`;
+const toggleAutoResetBtnId = `btn-toggle-auto-reset-${uuidv4()}`;
 
 const appStore = useAppStore();
 const modelStore = useModelStore();
@@ -33,6 +34,10 @@ const toggleMarkerSlotLabels = () =>
   });
 
 const resetModel = () => modelStore.reset();
+
+const toggleAutoReset = () => {
+  appStore.$patch({ autoReset: !appStore.autoReset });
+};
 </script>
 
 <template>
@@ -100,8 +105,21 @@ const resetModel = () => modelStore.reset();
     >Show marker slot labels</label
   ><br />
   <button type="button" class="btn btn-primary" @click="resetModel">
-    Reset model ({{ HOTKEYS.reset.label }})
-  </button>
+    Reset model ({{ HOTKEYS.reset.label }})</button
+  ><br />
+  <input
+    type="checkbox"
+    class="btn-check"
+    :id="toggleAutoResetBtnId"
+    :class="() => (appStore.autoReset ? 'active' : '')"
+    autocomplete="off"
+  />
+  <label
+    class="btn btn-primary"
+    :for="toggleAutoResetBtnId"
+    @click="toggleAutoReset"
+    >Enable auto-reset</label
+  >
 </template>
 
 <style scoped lang="scss">
