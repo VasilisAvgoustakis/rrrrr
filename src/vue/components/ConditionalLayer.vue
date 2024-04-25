@@ -4,10 +4,11 @@ import type { DeepReadonly } from 'ts-essentials';
 import { computed } from 'vue';
 
 import type { ConditionalLayerConfig } from '../../ts/config/config-schema-types';
+import type { Condition } from '../../ts/util/record-condition';
 
 import { useConfigStore } from '../../ts/stores/config';
 import { useModelStore } from '../../ts/stores/model';
-import { CircularEconomyModel } from '../../ts/circular-economy-model';
+import { compile } from '../../ts/util/record-condition';
 
 const props = defineProps<{
   layerConfig: DeepReadonly<ConditionalLayerConfig>;
@@ -16,19 +17,8 @@ const props = defineProps<{
 const { extractAssetPosition, toAssetUrl } = useConfigStore();
 const { record } = useModelStore();
 
-type Condition = (r: typeof record) => boolean;
-
-const conditionParameters = `{ ${CircularEconomyModel.elementIds.join(', ')} }`;
-function compile(condition: string): (r: typeof record) => boolean {
-  // eslint-disable-next-line @typescript-eslint/no-implied-eval
-  return new Function(
-    conditionParameters,
-    `return (${condition}) === true;`,
-  ) as Condition;
-}
-
 function compileLayer({ condition, url }: ConditionalLayerConfig): {
-  checkCondition: Condition;
+  checkCondition: Condition<typeof record>;
   condition: string;
   url: URL;
   x: number;

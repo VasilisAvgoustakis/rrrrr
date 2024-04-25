@@ -12,6 +12,7 @@ import BasicSlotGroup from './BasicSlotGroup.vue';
 import ActionCardSlotGroup from './ActionCardSlotGroup.vue';
 import EventCardSlotGroup from './EventCardSlotGroup.vue';
 import ModelVisualization from './ModelVisualization.vue';
+import ResetTimeoutOverlay from './ResetTimeoutOverlay.vue';
 
 import { HOTKEYS, BOARD_WIDTH, BOARD_HEIGHT } from '../../ts/builtin-config';
 import { useOptionStore } from '../../ts/stores/options';
@@ -189,6 +190,7 @@ onMounted(() => {
       @keydown="$event.stopPropagation()"
       :disabled="!enableControlPanel"
     />
+    <ResetTimeoutOverlay />
   </ScaledLetterBox>
 </template>
 

@@ -7,6 +7,10 @@
  *  - {@link https://github.com/grantila/typeconv}
  */
 
+export interface I18nConfig {
+  [key: string]: string;
+}
+
 export interface GeneralConfig {
   assetBaseDir: string;
   primaryLanguage: string;
@@ -18,6 +22,12 @@ export interface GeneralConfig {
     coverage: {
       [key: string]: string;
     };
+  };
+  autoReset: {
+    timeoutSeconds: number;
+    condition: string;
+    title: I18nConfig;
+    description: I18nConfig;
   };
 }
 
@@ -63,10 +73,6 @@ export interface InitialStocksConfig {
 export interface ParameterTransformConfig {
   id: string;
   script: string;
-}
-
-export interface I18nConfig {
-  [key: string]: string;
 }
 
 export interface MarkerSlotConfig {
