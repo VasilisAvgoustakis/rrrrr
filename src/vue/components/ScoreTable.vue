@@ -38,7 +38,17 @@ const happiness: ScoreInfo = {
 const scores = [circularity, happiness];
 
 const fractionDigits = 1;
-const format = (score: number) => `${(score * 100).toFixed(fractionDigits)}%`;
+const nanScoreText = `–.${''.padEnd(fractionDigits, '–')}`;
+const format = (score: number) => {
+  if (Number.isFinite(score))
+    return `${(score * 100).toFixed(fractionDigits)}%`;
+
+  if (score === Number.POSITIVE_INFINITY) return `∞%`;
+
+  if (score === Number.NEGATIVE_INFINITY) return `−∞%`;
+
+  return `${nanScoreText}%`;
+};
 </script>
 
 <template>
