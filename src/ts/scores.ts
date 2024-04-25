@@ -35,31 +35,24 @@ class Scores {
     return circularity;
   }
 
-  static happiness(record: Record) {
+  static coverage(record: Record) {
     const { phonesInUse } = record.stocks;
     const { phoneGoal } = record.variables;
 
-    const userSatisfaction =
-      phonesInUse < phoneGoal
-        ? phonesInUse / phoneGoal
-        : phoneGoal / phonesInUse;
+    const coverage = phonesInUse / phoneGoal;
 
-    if (!Number.isFinite(userSatisfaction) || Number.isNaN(userSatisfaction))
-      return 0;
+    if (!Number.isFinite(coverage) || Number.isNaN(coverage)) return 0;
 
-    assert(
-      userSatisfaction >= 0 && userSatisfaction <= 1,
-      'userSatisfaction should be between 0 and 1',
-    );
+    assert(coverage >= 0, 'userSatisfaction should be greater than 0');
 
-    return userSatisfaction;
+    return coverage;
   }
 
   static all(record: Record) {
     const circularity = Scores.circularity(record);
-    const happiness = Scores.happiness(record);
+    const coverage = Scores.coverage(record);
 
-    return { circularity, happiness };
+    return { circularity, coverage };
   }
 }
 

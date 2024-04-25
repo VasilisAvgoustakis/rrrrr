@@ -13,7 +13,7 @@ const {
   getSecondary,
 } = useConfigStore();
 const { scoreLabels } = general;
-const { circularity: circularityLabels, happiness: happinessLabels } =
+const { circularity: circularityLabels, coverage: coverageLabels } =
   scoreLabels;
 
 const modelStore = useModelStore();
@@ -29,13 +29,13 @@ const circularity: ScoreInfo = {
   primaryLabel: getPrimary(circularityLabels),
   secondaryLabel: getSecondary(circularityLabels),
 };
-const happiness: ScoreInfo = {
-  score: computed(() => Scores.happiness(modelStore.record)),
-  primaryLabel: getPrimary(happinessLabels),
-  secondaryLabel: getSecondary(happinessLabels),
+const coverage: ScoreInfo = {
+  score: computed(() => Scores.coverage(modelStore.record)),
+  primaryLabel: getPrimary(coverageLabels),
+  secondaryLabel: getSecondary(coverageLabels),
 };
 
-const scores = [circularity, happiness];
+const scores = [circularity, coverage];
 
 const fractionDigits = 1;
 const nanScoreText = `–.${''.padEnd(fractionDigits, '–')}`;

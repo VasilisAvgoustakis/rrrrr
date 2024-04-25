@@ -1,41 +1,26 @@
 parameterTransforms:
   - id: reduce
-    script: |-
-      acquireRate *= 0.5;
-      naturalResourcesIncentive *= 0.8;
-      newPhoneProductionRate *=0.8;
-      landfillIncentive *= 0.8;
+    script: |
       phonesPerUserGoal *= 0.9;
+      landfillIncentive *= 0.6;
+      naturalResourcesIncentive *= 0.6;
   - id: reuse
-    script: |
-      reuseIncentive *= 5;
-      disposeIncentive *=0.5;
-      acquireRate *= 2;
-      landfillIncentive *= 0.8;
-      naturalResourcesIncentive *= 0.8;
-  - id: repair
-    script: |
-      repairIncentive *= 2;
-      repairRate *= 3;
-      disposeIncentive *= 0.5;
-      disposeRate *= 0.5;
-      landfillIncentive *= 0.8;
-      naturalResourcesIncentive *= 0.8;
-  - id: refurbish
     script: |-
-      refurbishmentIncentive *= 3;
-      refurbishmentRate *= 2;
-      acquireRate *= 2;
-      abandonRate *= 1.5;
-      reuseIncentive *= 0.7;
-      landfillIncentive *= 0.8;
-      naturalResourcesIncentive *= 0.8;
+      reuseIncentive *= 3;
+  - id: repair
+    script: |-
+      repairIncentive *= 1.5;
+      repairRate *= 1.5;
+  - id: refurbish
+    script: |
+      refurbishmentIncentive *= 1.75;
+      refurbishmentRate *= 1.75;
   - id: recycle
     script: |-
-      recycleRate *= 2;
-      recyclingIncentive *= 2;
+      recyclingIncentive *= 1.3;
+      recycleRate *= 1.3;
   - id: (T) Triple Diamantglas
-    script: breakRate *= 0.005;
+    script: breakRate *= 0.1;
   - id: (T) KI-Automatisierung
     script: |-
       newPhoneProductionRate *=5;
@@ -58,8 +43,8 @@ parameterTransforms:
     script: |-
       newPhoneProductionRate *=2;
       breakRate *= 9;
-      recycleRate *= 0.5;
       refurbishmentRate *= 0.5;
+      refurbishmentIncentive *= 0.5;
       repairIncentive *= 0.5;
       repairRate *= 0.5;
       reuseIncentive *= 0.5;
@@ -67,14 +52,14 @@ parameterTransforms:
       disposeRate *= 2;
   - id: (T) Software Upgrade
     script: |-
-      newPhoneProductionRate *= 0.5;
-      newlyProducedPhoneIncentive *= 0.5;
+      newPhoneProductionRate *= 0.8;
+      newlyProducedPhoneIncentive *= 0.8;
       disposeIncentive *=0.5;
       disposeRate *= 0.5;
       reuseIncentive *= 5;
-      abandonRate *= 0.2;
+      abandonRate *= 0.5;
   - id: (P) Schul-Repair-Café
-    script: |
+    script: |-
       repairIncentive *= 3;
       repairRate *= 2;
       acquireRate *= 0.5;
@@ -128,7 +113,7 @@ parameterTransforms:
       reuseIncentive *= 0.9;
       phonesPerUserGoal *= 0.8;
   - id: (P) Ein-Telefon-Gesetz
-    script: |
+    script: |-
       phonesPerUserGoal *= 0.2;
       newPhoneProductionRate *= 0.5;
       newlyProducedPhoneIncentive *= 0.5;
@@ -162,7 +147,7 @@ parameterTransforms:
       landfillIncentive *= 1.5;
       naturalResourcesIncentive *= 1.5;
   - id: (E) Sicherheitslücke
-    script: |
+    script: |-
       abandonExcessRate *=5;
       abandonRate *=5;
       disposeIncentive *=5;

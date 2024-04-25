@@ -15,7 +15,7 @@ export interface GeneralConfig {
     circularity: {
       [key: string]: string;
     };
-    happiness: {
+    coverage: {
       [key: string]: string;
     };
   };

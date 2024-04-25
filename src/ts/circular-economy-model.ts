@@ -208,9 +208,9 @@ class CircularEconomyModel extends Model<
     const abandon =
       abandonRate * phonesInUse + abandonExcessRate * phonesInUseExcess;
     const goBroken = breakRate * phonesInUse;
-    const demandForPhones = Math.max(
-      0,
-      phoneGoal - phonesInUse + goBroken + abandon,
+    const demandForPhones = Math.min(
+      Math.max(0, phoneGoal - phonesInUse + goBroken + abandon),
+      phoneGoal,
     );
     const demandForNewlyProducedPhones = Math.max(
       0,
