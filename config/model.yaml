@@ -1,5 +1,7 @@
 model:
   initialStocks:
+    capacityOfNaturalResources: 0
+    supplyOfNaturalResources: 0
     capacityOfNewlyProducedPhones: 0
     capacityOfRecycledMaterials: 0
     capacityOfRefurbishedPhones: 0
@@ -23,6 +25,7 @@ model:
     landfillIncentive: 0.85
     landfillRate: 1
     naturalResourcesIncentive: 0.85
+    naturalResourceMiningRate: 1
     newPhoneProductionRate: 1
     newlyProducedPhoneIncentive: 0.85
     numberOfUsers: 1000000
