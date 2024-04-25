@@ -1,43 +1,37 @@
 import { strict as assert } from 'assert';
+import clamp from 'lodash/clamp';
+
 import type { Record } from './circular-economy-model';
 
 class Scores {
   static circularity(record: Record) {
     const {
       produceFromNaturalResources,
-      acquireNewlyProduced,
+      produceFromRecycledMaterials,
       acquireUsed,
       acquireRepaired,
       acquireRefurbished,
-      disposeHibernating,
-      disposeBroken,
+      repair,
+      refurbish,
+      recycle,
       landfill,
     } = record.flows;
 
-    const naturalResourcesShare = Math.min(
-      1.0,
-      produceFromNaturalResources /
-        (acquireNewlyProduced +
-          acquireUsed +
-          acquireRepaired +
-          acquireRefurbished),
-    );
-    const landfillShare = Math.min(
-      1.0,
-      landfill / (disposeHibernating + disposeBroken),
-    );
-    const circularity = Math.min(
-      1.0 - naturalResourcesShare,
-      1.0 - landfillShare,
-    );
+    /**
+     * The weights of flows with the same meaning wrt the economy are defined such that they add up to 1, such that
+     * flows that belong to the same aspect aren't counted multiple times.
+     */
+    const badFlowsWeightedSum = (produceFromNaturalResources + landfill) / 2;
+    const goodFlowsWeightedSum =
+      acquireUsed +
+      (repair + acquireRepaired) / 2 +
+      (refurbish + acquireRefurbished) / 2 +
+      (recycle + produceFromRecycledMaterials) / 2;
 
-    if (!Number.isFinite(circularity) || Number.isNaN(circularity)) return 0;
+    const goodFlowShare =
+      goodFlowsWeightedSum / (goodFlowsWeightedSum + badFlowsWeightedSum);
 
-    assert(
-      circularity >= 0 && circularity <= 1,
-      'circularity should be between 0 and 1',
-    );
-
+    const circularity = clamp(goodFlowShare, 0, 1);
     return circularity;
   }
 
