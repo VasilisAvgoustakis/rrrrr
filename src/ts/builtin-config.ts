@@ -36,6 +36,7 @@ const HOTKEYS = {
   developerMode: { key: 'd', label: 'd' },
   fullscreen: { key: 'f', label: 'f' },
   highlightDerivatives: { key: 'h', label: 'h' },
+  reset: { key: 'r', label: 'r' },
 } as const;
 
 export {

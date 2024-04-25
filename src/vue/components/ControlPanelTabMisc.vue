@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { HOTKEYS } from '../../ts/builtin-config';
 import { useAppStore } from '../../ts/stores/app';
+import { useModelStore } from '../../ts/stores/model';
 
 const togglePlayingBtnId = `btn-toggle-playing-${uuidv4()}`;
 const toggleFullscreenBtnId = `btn-toggle-playing-${uuidv4()}`;
@@ -11,6 +12,7 @@ const toggleHighlightDerivativesBtnId = `btn-toggle-playing-${uuidv4()}`;
 const toggleMarkerSlotLabelsBtnId = `btn-toggle-marker-slot-labels-${uuidv4()}`;
 
 const appStore = useAppStore();
+const modelStore = useModelStore();
 
 const togglePlaying = () => appStore.$patch({ isPlaying: !appStore.isPlaying });
 
@@ -29,6 +31,8 @@ const toggleMarkerSlotLabels = () =>
   appStore.$patch({
     showMarkerSlotLabels: !appStore.showMarkerSlotLabels,
   });
+
+const resetModel = () => modelStore.reset();
 </script>
 
 <template>
@@ -94,7 +98,10 @@ const toggleMarkerSlotLabels = () =>
     :for="toggleMarkerSlotLabelsBtnId"
     @click="toggleMarkerSlotLabels"
     >Show marker slot labels</label
-  >
+  ><br />
+  <button type="button" class="btn btn-primary" @click="resetModel">
+    Reset model ({{ HOTKEYS.reset.label }})
+  </button>
 </template>
 
 <style scoped lang="scss">

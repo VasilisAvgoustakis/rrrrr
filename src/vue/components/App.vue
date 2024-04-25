@@ -99,11 +99,14 @@ const toggleHighlightDerivatives = () => {
   appStore.highlightDerivatives = !appStore.highlightDerivatives;
 };
 
+const resetModel = modelStore.reset;
+
 onKeyStroke(HOTKEYS.controlPanel.key, toggleControlPanel);
 onKeyStroke(HOTKEYS.developerMode.key, toggleDeveloperMode);
 onKeyStroke(HOTKEYS.run.key, togglePlayPause);
 onKeyStroke(HOTKEYS.fullscreen.key, toggleFullscreen);
 onKeyStroke(HOTKEYS.highlightDerivatives.key, toggleHighlightDerivatives);
+onKeyStroke(HOTKEYS.reset.key, resetModel);
 
 watchEffect(() => {
   if (appStore.isPlaying) runner.play();
@@ -113,6 +116,7 @@ watchEffect(() => {
 const modelVisualizations = ref<Array<typeof ModelVisualization>>([]);
 onMounted(() => {
   const tick = (deltaMs: DOMHighResTimeStamp) => {
+    Object.assign(modelSimulator.record, modelStore.record);
     const { t: lastT } = modelSimulator.record;
     modelSimulator.tick(deltaMs);
     const { t: currentT } = modelSimulator.record;
