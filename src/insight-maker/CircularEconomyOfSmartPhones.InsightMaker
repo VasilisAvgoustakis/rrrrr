@@ -377,7 +377,7 @@
         </mxGeometry>
       </mxCell>
     </Link>
-    <Variable name="Demand for phones" Note="" Equation="Max(0,[Phone goal]-[Phones in use]+[go broken]+[abandon])" Units="Unitless" MaxConstraintUsed="false" MinConstraintUsed="false" MaxConstraint="100" MinConstraint="0" ShowSlider="false" SliderMax="100" SliderMin="0" SliderStep="" Image="None" FlipHorizontal="false" FlipVertical="false" LabelPosition="Middle" oldId="160" id="160">
+    <Variable name="Demand for phones" Note="" Equation="Min(Max(0,[Phone goal]-[Phones in use]+[go broken]+[abandon]),[Phone goal])" Units="Unitless" MaxConstraintUsed="false" MinConstraintUsed="false" MaxConstraint="100" MinConstraint="0" ShowSlider="false" SliderMax="100" SliderMin="0" SliderStep="" Image="None" FlipHorizontal="false" FlipVertical="false" LabelPosition="Middle" oldId="160" id="160">
       <mxCell style="variable;shape=rectangle;perimeter=rectanglePerimeter;fillColor=#FFFF99;" parent="1" vertex="1">
         <mxGeometry x="1120" y="470" width="120" height="50" as="geometry" />
       </mxCell>
