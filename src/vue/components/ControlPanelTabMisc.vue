@@ -42,7 +42,7 @@ const toggleMarkerSlotLabels = () =>
   />
   <label class="btn btn-primary" :for="togglePlayingBtnId"
     >Run ({{ HOTKEYS.run.label }})</label
-  >
+  ><br />
   <input
     type="checkbox"
     class="btn-check"
@@ -55,7 +55,7 @@ const toggleMarkerSlotLabels = () =>
     :for="toggleFullscreenBtnId"
     @click="toggleFullscreen"
     >Fullscreen ({{ HOTKEYS.fullscreen.label }})</label
-  >
+  ><br />
   <input
     type="checkbox"
     class="btn-check"
@@ -68,7 +68,7 @@ const toggleMarkerSlotLabels = () =>
     :for="toggleDeveloperModeBtnId"
     @click="toggleDeveloperMode"
     >Developer mode ({{ HOTKEYS.developerMode.label }})</label
-  >
+  ><br />
   <input
     type="checkbox"
     class="btn-check"
@@ -81,7 +81,7 @@ const toggleMarkerSlotLabels = () =>
     :for="toggleHighlightDerivativesBtnId"
     @click="toggleHighlightDerivatives"
     >Highlight derivatives ({{ HOTKEYS.highlightDerivatives.label }})</label
-  >
+  ><br />
   <input
     type="checkbox"
     class="btn-check"
@@ -96,3 +96,10 @@ const toggleMarkerSlotLabels = () =>
     >Show marker slot labels</label
   >
 </template>
+
+<style scoped lang="scss">
+.btn,
+.btn-check {
+  margin-bottom: 0.5rem;
+}
+</style>
