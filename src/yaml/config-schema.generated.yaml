@@ -63,13 +63,13 @@ definitions:
             type: object
             additionalProperties:
               type: string
-          happiness:
+          coverage:
             type: object
             additionalProperties:
               type: string
         required:
           - circularity
-          - happiness
+          - coverage
         additionalProperties: false
     required:
       - assetBaseDir

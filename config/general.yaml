@@ -6,6 +6,6 @@ general:
     circularity:
       en: Circularity
       de: Kreislauf
-    happiness:
+    coverage:
       de: Bedarf gedeckt
       en: Demand met

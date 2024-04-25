@@ -159,7 +159,7 @@ const GeneralSchema = suretype(
       scoreLabels: v
         .object({
           circularity: v.object({}).additional(v.string()).required(),
-          happiness: v.object({}).additional(v.string()).required(),
+          coverage: v.object({}).additional(v.string()).required(),
         })
         .additional(false)
         .required(),
