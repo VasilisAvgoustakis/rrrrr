@@ -178,6 +178,8 @@ definitions:
         type: number
       capacityOfNewlyProducedPhones:
         type: number
+      capacityOfPhonesInUse:
+        type: number
       capacityOfRecycledMaterials:
         type: number
       capacityOfRefurbishedPhones:
@@ -205,6 +207,7 @@ definitions:
     required:
       - capacityOfNaturalResources
       - capacityOfNewlyProducedPhones
+      - capacityOfPhonesInUse
       - capacityOfRecycledMaterials
       - capacityOfRefurbishedPhones
       - capacityOfRepairedPhones

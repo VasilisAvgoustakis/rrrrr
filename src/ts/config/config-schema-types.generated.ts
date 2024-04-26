@@ -59,6 +59,7 @@ export interface InitialParametersConfig {
 export interface InitialStocksConfig {
   capacityOfNaturalResources: number;
   capacityOfNewlyProducedPhones: number;
+  capacityOfPhonesInUse: number;
   capacityOfRecycledMaterials: number;
   capacityOfRefurbishedPhones: number;
   capacityOfRepairedPhones: number;

@@ -3,6 +3,7 @@ model:
     capacityOfNaturalResources: 0
     supplyOfNaturalResources: 0
     capacityOfNewlyProducedPhones: 0
+    capacityOfPhonesInUse: 0
     capacityOfRecycledMaterials: 0
     capacityOfRefurbishedPhones: 0
     capacityOfRepairedPhones: 0

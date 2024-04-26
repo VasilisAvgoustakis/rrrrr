@@ -44,6 +44,7 @@ const mainCapacityIds = [
   'repairedPhones',
   'refurbishedPhones',
   'newlyProducedPhones',
+  'phonesInUse',
 ] as const;
 
 const mainSupplyIds = [
