@@ -15,149 +15,151 @@ const rawDataTabDisabled = ref(true);
 </script>
 
 <template>
-  <div class="control-panel" :class="{ hidden: props.disabled }">
-    <nav>
-      <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <button
-          class="nav-link"
-          id="nav-initial-parameters-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#nav-initial-parameters"
-          type="button"
-          role="tab"
-          aria-controls="nav-initial-parameters"
-          aria-selected="false"
+  <div :class="{ hidden: props.disabled }">
+    <div class="control-panel">
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button
+            class="nav-link"
+            id="nav-initial-parameters-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-initial-parameters"
+            type="button"
+            role="tab"
+            aria-controls="nav-initial-parameters"
+            aria-selected="false"
+          >
+            Initial parameters
+          </button>
+          <button
+            class="nav-link active"
+            id="nav-parameter-transforms-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-parameter-transforms"
+            type="button"
+            role="tab"
+            aria-controls="nav-parameter-transforms"
+            aria-selected="true"
+          >
+            Parameter transforms
+          </button>
+          <button
+            class="nav-link"
+            id="nav-diagrams-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-diagrams"
+            type="button"
+            role="tab"
+            aria-controls="nav-diagrams"
+            aria-selected="false"
+            v-on="{
+              'hidden.bs.tab': () => (diagramsTabDisabled = true),
+              'show.bs.tab': () => (diagramsTabDisabled = false),
+            }"
+          >
+            Diagrams
+          </button>
+          <button
+            class="nav-link"
+            id="nav-raw-data-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-raw-data"
+            type="button"
+            role="tab"
+            aria-controls="nav-raw-data"
+            aria-selected="false"
+            v-on="{
+              'hidden.bs.tab': () => (rawDataTabDisabled = true),
+              'show.bs.tab': () => (rawDataTabDisabled = false),
+            }"
+          >
+            Raw data
+          </button>
+          <button
+            class="nav-link"
+            id="nav-import-export-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-import-export"
+            type="button"
+            role="tab"
+            aria-controls="nav-import-export"
+            aria-selected="false"
+          >
+            Import/Export
+          </button>
+          <button
+            class="nav-link"
+            id="nav-misc-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-misc"
+            type="button"
+            role="tab"
+            aria-controls="nav-misc"
+            aria-selected="true"
+          >
+            Misc
+          </button>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div
+          class="tab-pane show"
+          id="nav-initial-parameters"
+          role="tabpanel"
+          aria-labelledby="nav-initial-parameters-tab"
+          tabindex="0"
         >
-          Initial parameters
-        </button>
-        <button
-          class="nav-link active"
-          id="nav-parameter-transforms-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#nav-parameter-transforms"
-          type="button"
-          role="tab"
-          aria-controls="nav-parameter-transforms"
-          aria-selected="true"
+          <ControlPanelTabInitialParameters />
+        </div>
+        <div
+          class="tab-pane show active"
+          id="nav-parameter-transforms"
+          role="tabpanel"
+          aria-labelledby="nav-parameter-transforms-tab"
+          tabindex="0"
         >
-          Parameter transforms
-        </button>
-        <button
-          class="nav-link"
-          id="nav-diagrams-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#nav-diagrams"
-          type="button"
-          role="tab"
-          aria-controls="nav-diagrams"
-          aria-selected="false"
-          v-on="{
-            'hidden.bs.tab': () => (diagramsTabDisabled = true),
-            'show.bs.tab': () => (diagramsTabDisabled = false),
-          }"
+          <ControlPanelTabParameterTransforms />
+        </div>
+        <div
+          class="tab-pane show"
+          id="nav-diagrams"
+          role="tabpanel"
+          aria-labelledby="nav-diagrams-tab"
+          tabindex="0"
         >
-          Diagrams
-        </button>
-        <button
-          class="nav-link"
-          id="nav-raw-data-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#nav-raw-data"
-          type="button"
-          role="tab"
-          aria-controls="nav-raw-data"
-          aria-selected="false"
-          v-on="{
-            'hidden.bs.tab': () => (rawDataTabDisabled = true),
-            'show.bs.tab': () => (rawDataTabDisabled = false),
-          }"
+          <ControlPanelTabCharts
+            :disabled="props.disabled || diagramsTabDisabled"
+          />
+        </div>
+        <div
+          class="tab-pane show"
+          id="nav-raw-data"
+          role="tabpanel"
+          aria-labelledby="nav-raw-data-tab"
+          tabindex="0"
         >
-          Raw data
-        </button>
-        <button
-          class="nav-link"
-          id="nav-import-export-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#nav-import-export"
-          type="button"
-          role="tab"
-          aria-controls="nav-import-export"
-          aria-selected="false"
+          <ControlPanelTabRawData
+            :disabled="props.disabled || rawDataTabDisabled"
+          />
+        </div>
+        <div
+          class="tab-pane show"
+          id="nav-import-export"
+          role="tabpanel"
+          aria-labelledby="nav-import-export-tab"
+          tabindex="0"
         >
-          Import/Export
-        </button>
-        <button
-          class="nav-link"
-          id="nav-misc-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#nav-misc"
-          type="button"
-          role="tab"
-          aria-controls="nav-misc"
-          aria-selected="true"
+          <ControlPanelTabImportExport />
+        </div>
+        <div
+          class="tab-pane show"
+          id="nav-misc"
+          role="tabpanel"
+          aria-labelledby="nav-misc-tab"
+          tabindex="0"
         >
-          Misc
-        </button>
-      </div>
-    </nav>
-    <div class="tab-content" id="nav-tabContent">
-      <div
-        class="tab-pane show"
-        id="nav-initial-parameters"
-        role="tabpanel"
-        aria-labelledby="nav-initial-parameters-tab"
-        tabindex="0"
-      >
-        <ControlPanelTabInitialParameters />
-      </div>
-      <div
-        class="tab-pane show active"
-        id="nav-parameter-transforms"
-        role="tabpanel"
-        aria-labelledby="nav-parameter-transforms-tab"
-        tabindex="0"
-      >
-        <ControlPanelTabParameterTransforms />
-      </div>
-      <div
-        class="tab-pane show"
-        id="nav-diagrams"
-        role="tabpanel"
-        aria-labelledby="nav-diagrams-tab"
-        tabindex="0"
-      >
-        <ControlPanelTabCharts
-          :disabled="props.disabled || diagramsTabDisabled"
-        />
-      </div>
-      <div
-        class="tab-pane show"
-        id="nav-raw-data"
-        role="tabpanel"
-        aria-labelledby="nav-raw-data-tab"
-        tabindex="0"
-      >
-        <ControlPanelTabRawData
-          :disabled="props.disabled || rawDataTabDisabled"
-        />
-      </div>
-      <div
-        class="tab-pane show"
-        id="nav-import-export"
-        role="tabpanel"
-        aria-labelledby="nav-import-export-tab"
-        tabindex="0"
-      >
-        <ControlPanelTabImportExport />
-      </div>
-      <div
-        class="tab-pane show"
-        id="nav-misc"
-        role="tabpanel"
-        aria-labelledby="nav-misc-tab"
-        tabindex="0"
-      >
-        <ControlPanelTabMisc />
+          <ControlPanelTabMisc />
+        </div>
       </div>
     </div>
   </div>
