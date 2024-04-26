@@ -13,7 +13,7 @@ general:
     timeoutSeconds: 10
     condition: |-
       Object.values(stocks).reduce(
-        (acc, stockValue) => acc || stockValue > variables.phoneGoal * 5,
+        (acc, stockValue) => acc || stockValue > variables.phoneGoal * 30,
         false,
       )
     title:

@@ -26,10 +26,14 @@ function watchModel() {
       remainingSeconds.value = Math.round(autoResetConfig.timeoutSeconds);
       stopCountdown = useIntervalFn(() => {
         remainingSeconds.value -= 1;
-        if (remainingSeconds.value === 0) {
-          stopCountdown();
-          modelStore.reset();
-          watchModel();
+        switch (remainingSeconds.value) {
+          case 0:
+            modelStore.reset();
+            break;
+          case -1:
+            stopCountdown();
+            watchModel();
+            break;
         }
       }).pause;
     }

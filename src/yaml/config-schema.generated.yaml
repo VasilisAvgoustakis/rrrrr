@@ -121,6 +121,8 @@ definitions:
         type: number
       landfillRate:
         type: number
+      naturalResourceMiningRate:
+        type: number
       naturalResourcesIncentive:
         type: number
       newPhoneProductionRate:
@@ -155,6 +157,7 @@ definitions:
       - disposeRate
       - landfillIncentive
       - landfillRate
+      - naturalResourceMiningRate
       - naturalResourcesIncentive
       - newPhoneProductionRate
       - newlyProducedPhoneIncentive
@@ -171,7 +174,11 @@ definitions:
   InitialStocksConfig:
     type: object
     properties:
+      capacityOfNaturalResources:
+        type: number
       capacityOfNewlyProducedPhones:
+        type: number
+      capacityOfPhonesInUse:
         type: number
       capacityOfRecycledMaterials:
         type: number
@@ -187,6 +194,8 @@ definitions:
         type: number
       supplyOfHibernatingPhones:
         type: number
+      supplyOfNaturalResources:
+        type: number
       supplyOfNewlyProducedPhones:
         type: number
       supplyOfRecycledMaterials:
@@ -196,7 +205,9 @@ definitions:
       supplyOfRepairedPhones:
         type: number
     required:
+      - capacityOfNaturalResources
       - capacityOfNewlyProducedPhones
+      - capacityOfPhonesInUse
       - capacityOfRecycledMaterials
       - capacityOfRefurbishedPhones
       - capacityOfRepairedPhones
@@ -204,6 +215,7 @@ definitions:
       - supplyOfBrokenPhones
       - supplyOfDisposedPhones
       - supplyOfHibernatingPhones
+      - supplyOfNaturalResources
       - supplyOfNewlyProducedPhones
       - supplyOfRecycledMaterials
       - supplyOfRefurbishedPhones
