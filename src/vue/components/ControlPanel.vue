@@ -176,6 +176,8 @@ const rawDataTabDisabled = ref(true);
   background-color: white;
   transform-origin: top right;
   transform: scale(2);
+  display: flex;
+  flex-direction: column;
 
   & nav {
     padding-top: 1ex;
@@ -187,6 +189,11 @@ const rawDataTabDisabled = ref(true);
 
   & .tab-pane {
     padding: 1em;
+  }
+
+  & .tab-content {
+    flex-grow: 2;
+    overflow: scroll;
   }
 }
 </style>
