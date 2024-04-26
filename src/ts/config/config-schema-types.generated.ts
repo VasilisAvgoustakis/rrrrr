@@ -41,6 +41,7 @@ export interface InitialParametersConfig {
   disposeRate: number;
   landfillIncentive: number;
   landfillRate: number;
+  naturalResourceMiningRate: number;
   naturalResourcesIncentive: number;
   newPhoneProductionRate: number;
   newlyProducedPhoneIncentive: number;
@@ -56,6 +57,7 @@ export interface InitialParametersConfig {
 }
 
 export interface InitialStocksConfig {
+  capacityOfNaturalResources: number;
   capacityOfNewlyProducedPhones: number;
   capacityOfRecycledMaterials: number;
   capacityOfRefurbishedPhones: number;
@@ -64,6 +66,7 @@ export interface InitialStocksConfig {
   supplyOfBrokenPhones: number;
   supplyOfDisposedPhones: number;
   supplyOfHibernatingPhones: number;
+  supplyOfNaturalResources: number;
   supplyOfNewlyProducedPhones: number;
   supplyOfRecycledMaterials: number;
   supplyOfRefurbishedPhones: number;
