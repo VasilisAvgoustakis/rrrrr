@@ -12,6 +12,7 @@ import BasicSlotGroup from './BasicSlotGroup.vue';
 import ActionCardSlotGroup from './ActionCardSlotGroup.vue';
 import EventCardSlotGroup from './EventCardSlotGroup.vue';
 import ModelVisualization from './ModelVisualization.vue';
+import ResetTimeoutOverlay from './ResetTimeoutOverlay.vue';
 
 import { HOTKEYS, BOARD_WIDTH, BOARD_HEIGHT } from '../../ts/builtin-config';
 import { useOptionStore } from '../../ts/stores/options';
@@ -99,11 +100,14 @@ const toggleHighlightDerivatives = () => {
   appStore.highlightDerivatives = !appStore.highlightDerivatives;
 };
 
+const resetModel = modelStore.reset;
+
 onKeyStroke(HOTKEYS.controlPanel.key, toggleControlPanel);
 onKeyStroke(HOTKEYS.developerMode.key, toggleDeveloperMode);
 onKeyStroke(HOTKEYS.run.key, togglePlayPause);
 onKeyStroke(HOTKEYS.fullscreen.key, toggleFullscreen);
 onKeyStroke(HOTKEYS.highlightDerivatives.key, toggleHighlightDerivatives);
+onKeyStroke(HOTKEYS.reset.key, resetModel);
 
 watchEffect(() => {
   if (appStore.isPlaying) runner.play();
@@ -113,6 +117,17 @@ watchEffect(() => {
 const modelVisualizations = ref<Array<typeof ModelVisualization>>([]);
 onMounted(() => {
   const tick = (deltaMs: DOMHighResTimeStamp) => {
+    /**
+     * The current record from the model store can be externally modified,
+     * e.g. through the reset function. To ensure that the simulator is in sync,
+     * some properties are copied over from the model store to the simulator.
+     *
+     * TODO: Refactor the simulator such that is uses the global state directly
+     *       to make syncing unnecessary.
+     */
+    const { parameters } = modelSimulator.record;
+    Object.assign(modelSimulator.record, modelStore.record, { parameters });
+
     const { t: lastT } = modelSimulator.record;
     modelSimulator.tick(deltaMs);
     const { t: currentT } = modelSimulator.record;
@@ -181,6 +196,7 @@ onMounted(() => {
         class="pointer-events-fallthrough"
       ></TuioMarkerPanel>
     </div>
+    <ResetTimeoutOverlay v-if="appStore.autoReset" />
     <ControlPanel
       @keydown="$event.stopPropagation()"
       :disabled="!enableControlPanel"

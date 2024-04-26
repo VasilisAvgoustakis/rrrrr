@@ -9,6 +9,7 @@ import type {
 import { Model } from './model';
 
 const stockIds = [
+  'capacityOfNaturalResources',
   'capacityOfNewlyProducedPhones',
   'capacityOfRecycledMaterials',
   'capacityOfRefurbishedPhones',
@@ -17,6 +18,7 @@ const stockIds = [
   'supplyOfBrokenPhones',
   'supplyOfDisposedPhones',
   'supplyOfHibernatingPhones',
+  'supplyOfNaturalResources',
   'supplyOfNewlyProducedPhones',
   'supplyOfRecycledMaterials',
   'supplyOfRefurbishedPhones',
@@ -29,6 +31,7 @@ const flowIds = [
   'acquireRefurbished',
   'acquireRepaired',
   'acquireUsed',
+  'capacityOfNaturalResourcesAdjustment',
   'capacityOfNewlyProducedPhonesAdjustment',
   'capacityOfRecycledMaterialsAdjustment',
   'capacityOfRefurbishedPhonesAdjustment',
@@ -36,6 +39,7 @@ const flowIds = [
   'disposeHibernating',
   'goBroken',
   'landfill',
+  'mineNaturalResources',
   'produceFromNaturalResources',
   'produceFromRecycledMaterials',
   'recycle',
@@ -45,6 +49,7 @@ const flowIds = [
 ] as const;
 
 const variableIds = [
+  'demandForMining',
   'demandForNaturalResources',
   'demandForNewlyProducedPhones',
   'demandForPhones',
@@ -78,6 +83,7 @@ const parameterIds = [
   'disposeRate',
   'landfillIncentive',
   'landfillRate',
+  'naturalResourceMiningRate',
   'naturalResourcesIncentive',
   'newPhoneProductionRate',
   'newlyProducedPhoneIncentive',
@@ -121,6 +127,7 @@ class CircularEconomyModel extends Model<
   ParameterIds
 > {
   public static readonly initialStocks: Readonly<Stocks> = {
+    capacityOfNaturalResources: 0,
     capacityOfNewlyProducedPhones: 0,
     capacityOfRecycledMaterials: 0,
     capacityOfRefurbishedPhones: 0,
@@ -129,6 +136,7 @@ class CircularEconomyModel extends Model<
     supplyOfBrokenPhones: 0,
     supplyOfDisposedPhones: 0,
     supplyOfHibernatingPhones: 0,
+    supplyOfNaturalResources: 0,
     supplyOfNewlyProducedPhones: 0,
     supplyOfRecycledMaterials: 0,
     supplyOfRefurbishedPhones: 0,
@@ -145,6 +153,7 @@ class CircularEconomyModel extends Model<
     disposeRate: 0.5,
     landfillIncentive: 0.5,
     landfillRate: 1,
+    naturalResourceMiningRate: 0.5,
     naturalResourcesIncentive: 0.5,
     newPhoneProductionRate: 0.5,
     newlyProducedPhoneIncentive: 0.82,
@@ -166,6 +175,7 @@ class CircularEconomyModel extends Model<
   // eslint-disable-next-line class-methods-use-this
   public evaluate(stocks: Stocks, parameters: Parameters, t: number): Record {
     const {
+      capacityOfNaturalResources,
       capacityOfNewlyProducedPhones,
       capacityOfRecycledMaterials,
       capacityOfRefurbishedPhones,
@@ -174,6 +184,7 @@ class CircularEconomyModel extends Model<
       supplyOfBrokenPhones,
       supplyOfDisposedPhones,
       supplyOfHibernatingPhones,
+      supplyOfNaturalResources,
       supplyOfNewlyProducedPhones,
       supplyOfRecycledMaterials,
       supplyOfRefurbishedPhones,
@@ -189,6 +200,7 @@ class CircularEconomyModel extends Model<
       disposeRate,
       landfillIncentive,
       landfillRate,
+      naturalResourceMiningRate,
       naturalResourcesIncentive,
       newPhoneProductionRate,
       newlyProducedPhoneIncentive,
@@ -212,16 +224,8 @@ class CircularEconomyModel extends Model<
       Math.max(0, phoneGoal - phonesInUse + goBroken + abandon),
       phoneGoal,
     );
-    const demandForNewlyProducedPhones = Math.max(
-      0,
-      demandForPhones -
-        (supplyOfRepairedPhones +
-          supplyOfRefurbishedPhones +
-          supplyOfHibernatingPhones),
-    );
     const acquireNewlyProduced =
-      acquireRate *
-      Math.min(supplyOfNewlyProducedPhones, demandForNewlyProducedPhones);
+      acquireRate * Math.min(supplyOfNewlyProducedPhones, demandForPhones);
     const acquireRefurbished =
       acquireRate * Math.min(demandForPhones, supplyOfRefurbishedPhones);
     const acquireRepaired =
@@ -233,26 +237,36 @@ class CircularEconomyModel extends Model<
     const acquireUsed =
       acquireRate *
       Math.min(supplyOfHibernatingPhonesForReuse, demandForPhones);
-    const capacityOfNewlyProducedPhonesAdjustment =
-      capacityAdjustmentRate *
-      (demandForNewlyProducedPhones - capacityOfNewlyProducedPhones);
     const demandForResources = Math.max(
       capacityOfNewlyProducedPhones -
         supplyOfNewlyProducedPhones +
         acquireNewlyProduced,
       0,
     );
+    const demandForNaturalResources =
+      (naturalResourcesIncentive /
+        (naturalResourcesIncentive + recyclingIncentive)) *
+      demandForResources;
+    const capacityOfNaturalResourcesAdjustment =
+      capacityAdjustmentRate *
+      (demandForNaturalResources - capacityOfNaturalResources);
+    const inflowIncentiveSumForPhonesInUse =
+      reuseIncentive +
+      repairIncentive +
+      refurbishmentIncentive +
+      newlyProducedPhoneIncentive;
+    const demandForNewlyProducedPhones =
+      (newlyProducedPhoneIncentive / inflowIncentiveSumForPhonesInUse) *
+      demandForPhones;
+    const capacityOfNewlyProducedPhonesAdjustment =
+      capacityAdjustmentRate *
+      (demandForNewlyProducedPhones - capacityOfNewlyProducedPhones);
     const demandForRecycledMaterials =
       (recyclingIncentive / (naturalResourcesIncentive + recyclingIncentive)) *
       demandForResources;
     const capacityOfRecycledMaterialsAdjustment =
       capacityAdjustmentRate *
       (demandForRecycledMaterials - capacityOfRecycledMaterials);
-    const inflowIncentiveSumForPhonesInUse =
-      reuseIncentive +
-      repairIncentive +
-      refurbishmentIncentive +
-      newlyProducedPhoneIncentive;
     const demandForRefurbishedPhones =
       (refurbishmentIncentive / inflowIncentiveSumForPhonesInUse) *
       demandForPhones;
@@ -275,7 +289,14 @@ class CircularEconomyModel extends Model<
     const landfill = landfillRate * supplyOfDisposedPhonesForLandfilling;
     const produceFromNaturalResources =
       newPhoneProductionRate *
-      Math.max(0, demandForResources - supplyOfRecycledMaterials);
+      Math.min(supplyOfNaturalResources, demandForResources);
+    const demandForMining = Math.max(
+      capacityOfNaturalResources -
+        supplyOfNaturalResources +
+        produceFromNaturalResources,
+      0,
+    );
+    const mineNaturalResources = naturalResourceMiningRate * demandForMining;
     const produceFromRecycledMaterials =
       newPhoneProductionRate *
       Math.min(demandForResources, supplyOfRecycledMaterials);
@@ -321,14 +342,11 @@ class CircularEconomyModel extends Model<
     const repairShopCapcityAdjustment =
       capacityAdjustmentRate *
       (demandForRepairedPhones - capacityOfRepairedPhones);
-    const demandForNaturalResources =
-      (naturalResourcesIncentive /
-        (naturalResourcesIncentive + recyclingIncentive)) *
-      demandForResources;
     const demandForReusedPhones =
       (reuseIncentive / inflowIncentiveSumForPhonesInUse) * demandForPhones;
 
     const variables = {
+      demandForMining,
       demandForNaturalResources,
       demandForNewlyProducedPhones,
       demandForPhones,
@@ -357,6 +375,7 @@ class CircularEconomyModel extends Model<
       acquireRefurbished,
       acquireRepaired,
       acquireUsed,
+      capacityOfNaturalResourcesAdjustment,
       capacityOfNewlyProducedPhonesAdjustment,
       capacityOfRecycledMaterialsAdjustment,
       capacityOfRefurbishedPhonesAdjustment,
@@ -364,6 +383,7 @@ class CircularEconomyModel extends Model<
       disposeHibernating,
       goBroken,
       landfill,
+      mineNaturalResources,
       produceFromNaturalResources,
       produceFromRecycledMaterials,
       recycle,
@@ -383,6 +403,7 @@ class CircularEconomyModel extends Model<
       acquireRefurbished,
       acquireRepaired,
       acquireUsed,
+      capacityOfNaturalResourcesAdjustment,
       capacityOfNewlyProducedPhonesAdjustment,
       capacityOfRecycledMaterialsAdjustment,
       capacityOfRefurbishedPhonesAdjustment,
@@ -390,6 +411,7 @@ class CircularEconomyModel extends Model<
       disposeHibernating,
       goBroken,
       landfill,
+      mineNaturalResources,
       produceFromNaturalResources,
       produceFromRecycledMaterials,
       recycle,
@@ -399,6 +421,7 @@ class CircularEconomyModel extends Model<
     } = flows;
 
     const flowPerStock: Stocks = {
+      capacityOfNaturalResources: capacityOfNaturalResourcesAdjustment,
       capacityOfNewlyProducedPhones: capacityOfNewlyProducedPhonesAdjustment,
       capacityOfRecycledMaterials: capacityOfRecycledMaterialsAdjustment,
       capacityOfRefurbishedPhones: capacityOfRefurbishedPhonesAdjustment,
@@ -414,6 +437,8 @@ class CircularEconomyModel extends Model<
         disposeBroken + disposeHibernating - (landfill + recycle),
       supplyOfHibernatingPhones:
         abandon - (acquireUsed + disposeHibernating + refurbish),
+      supplyOfNaturalResources:
+        mineNaturalResources - produceFromNaturalResources,
       supplyOfNewlyProducedPhones:
         produceFromNaturalResources +
         produceFromRecycledMaterials -

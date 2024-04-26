@@ -3,14 +3,17 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { HOTKEYS } from '../../ts/builtin-config';
 import { useAppStore } from '../../ts/stores/app';
+import { useModelStore } from '../../ts/stores/model';
 
 const togglePlayingBtnId = `btn-toggle-playing-${uuidv4()}`;
 const toggleFullscreenBtnId = `btn-toggle-playing-${uuidv4()}`;
 const toggleDeveloperModeBtnId = `btn-toggle-playing-${uuidv4()}`;
 const toggleHighlightDerivativesBtnId = `btn-toggle-playing-${uuidv4()}`;
 const toggleMarkerSlotLabelsBtnId = `btn-toggle-marker-slot-labels-${uuidv4()}`;
+const toggleAutoResetBtnId = `btn-toggle-auto-reset-${uuidv4()}`;
 
 const appStore = useAppStore();
+const modelStore = useModelStore();
 
 const togglePlaying = () => appStore.$patch({ isPlaying: !appStore.isPlaying });
 
@@ -29,6 +32,12 @@ const toggleMarkerSlotLabels = () =>
   appStore.$patch({
     showMarkerSlotLabels: !appStore.showMarkerSlotLabels,
   });
+
+const resetModel = () => modelStore.reset();
+
+const toggleAutoReset = () => {
+  appStore.$patch({ autoReset: !appStore.autoReset });
+};
 </script>
 
 <template>
@@ -42,7 +51,7 @@ const toggleMarkerSlotLabels = () =>
   />
   <label class="btn btn-primary" :for="togglePlayingBtnId"
     >Run ({{ HOTKEYS.run.label }})</label
-  >
+  ><br />
   <input
     type="checkbox"
     class="btn-check"
@@ -55,7 +64,7 @@ const toggleMarkerSlotLabels = () =>
     :for="toggleFullscreenBtnId"
     @click="toggleFullscreen"
     >Fullscreen ({{ HOTKEYS.fullscreen.label }})</label
-  >
+  ><br />
   <input
     type="checkbox"
     class="btn-check"
@@ -68,7 +77,7 @@ const toggleMarkerSlotLabels = () =>
     :for="toggleDeveloperModeBtnId"
     @click="toggleDeveloperMode"
     >Developer mode ({{ HOTKEYS.developerMode.label }})</label
-  >
+  ><br />
   <input
     type="checkbox"
     class="btn-check"
@@ -81,7 +90,7 @@ const toggleMarkerSlotLabels = () =>
     :for="toggleHighlightDerivativesBtnId"
     @click="toggleHighlightDerivatives"
     >Highlight derivatives ({{ HOTKEYS.highlightDerivatives.label }})</label
-  >
+  ><br />
   <input
     type="checkbox"
     class="btn-check"
@@ -94,5 +103,28 @@ const toggleMarkerSlotLabels = () =>
     :for="toggleMarkerSlotLabelsBtnId"
     @click="toggleMarkerSlotLabels"
     >Show marker slot labels</label
+  ><br />
+  <button type="button" class="btn btn-primary" @click="resetModel">
+    Reset model ({{ HOTKEYS.reset.label }})</button
+  ><br />
+  <input
+    type="checkbox"
+    class="btn-check"
+    :id="toggleAutoResetBtnId"
+    :class="() => (appStore.autoReset ? 'active' : '')"
+    autocomplete="off"
+  />
+  <label
+    class="btn btn-primary"
+    :for="toggleAutoResetBtnId"
+    @click="toggleAutoReset"
+    >Enable auto-reset</label
   >
 </template>
+
+<style scoped lang="scss">
+.btn,
+.btn-check {
+  margin-bottom: 0.5rem;
+}
+</style>

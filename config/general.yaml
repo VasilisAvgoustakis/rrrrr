@@ -9,3 +9,16 @@ general:
     coverage:
       de: Bedarf gedeckt
       en: Demand met
+  autoReset:
+    timeoutSeconds: 10
+    condition: |-
+      Object.values(stocks).reduce(
+        (acc, stockValue) => acc || stockValue > variables.phoneGoal * 5,
+        false,
+      )
+    title:
+      de: Du hast die Wirtschaft zerschmettert!
+      en: You crashed the economy!
+    description:
+      de: Spiel startet neu.
+      en: Restarting game.

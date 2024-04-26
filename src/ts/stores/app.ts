@@ -11,6 +11,7 @@ export const useAppStore = defineStore('app', () => {
   const isDeveloperModeActive = ref(optionStore.developerMode);
   const highlightDerivatives = ref(optionStore.highlightDerivatives);
   const showMarkerSlotLabels = ref(optionStore.markerSlotLabels);
+  const autoReset = ref(optionStore.autoReset);
 
   const scale = ref(1);
 
@@ -20,6 +21,7 @@ export const useAppStore = defineStore('app', () => {
     isDeveloperModeActive,
     highlightDerivatives,
     showMarkerSlotLabels,
+    autoReset,
     scale,
   };
 });

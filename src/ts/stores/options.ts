@@ -30,6 +30,8 @@ export const useOptionStore = defineStore('options', () => {
   const markerSlotLabels =
     (searchParams.get('markerSlotLabels') ?? 'true') === 'true';
 
+  const autoReset = (searchParams.get('autoReset') ?? 'true') === 'true';
+
   const result = {
     useTuioMarkers,
     usePointerMarkers,
@@ -40,6 +42,7 @@ export const useOptionStore = defineStore('options', () => {
     developerMode,
     highlightDerivatives,
     markerSlotLabels,
+    autoReset,
   };
 
   return result as DeepReadonly<typeof result>;

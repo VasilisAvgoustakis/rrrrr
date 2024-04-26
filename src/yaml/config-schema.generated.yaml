@@ -47,6 +47,10 @@ required:
   - layers
 additionalProperties: false
 definitions:
+  I18nConfig:
+    type: object
+    additionalProperties:
+      type: string
   GeneralConfig:
     type: object
     properties:
@@ -71,11 +75,30 @@ definitions:
           - circularity
           - coverage
         additionalProperties: false
+      autoReset:
+        type: object
+        properties:
+          timeoutSeconds:
+            type: number
+            minimum: 0
+          condition:
+            type: string
+          title:
+            $ref: '#/definitions/I18nConfig'
+          description:
+            $ref: '#/definitions/I18nConfig'
+        required:
+          - timeoutSeconds
+          - condition
+          - title
+          - description
+        additionalProperties: false
     required:
       - assetBaseDir
       - primaryLanguage
       - secondaryLanguage
       - scoreLabels
+      - autoReset
     additionalProperties: false
   InitialParametersConfig:
     type: object
@@ -197,10 +220,6 @@ definitions:
       - id
       - script
     additionalProperties: false
-  I18nConfig:
-    type: object
-    additionalProperties:
-      type: string
   MarkerSlotConfig:
     type: object
     properties:

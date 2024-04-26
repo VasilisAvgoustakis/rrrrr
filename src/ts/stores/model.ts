@@ -3,7 +3,7 @@ import type { Ref } from 'vue';
 
 import { strict as assert } from 'assert';
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { ref, toRaw } from 'vue';
 import { reactiveComputed } from '@vueuse/core';
 
 import type { ParameterId, Parameters } from '../circular-economy-model';
@@ -85,21 +85,30 @@ export const useModelStore = defineStore('model', () => {
   const {
     config: { model: modelConfig },
   } = useConfigStore();
+
   const initialRecord = new CircularEconomyModel().evaluate(
-    modelConfig.initialStocks,
-    modelConfig.initialParameters,
+    toRaw(modelConfig.initialStocks),
+    toRaw(modelConfig.initialParameters),
     0,
   );
-  const record = ref(initialRecord);
+  console.log(initialRecord);
+
+  const record = ref(structuredClone(initialRecord));
 
   const initialParameters = ref({ ...modelConfig.initialParameters });
 
   const { transformedParameters, transformedParametersExt } =
     useTransformedParameters(initialParameters);
+
+  const reset = () => {
+    record.value = structuredClone(initialRecord);
+  };
+
   return {
     record,
     initialParameters,
     transformedParameters,
     transformedParametersExt,
+    reset,
   };
 });

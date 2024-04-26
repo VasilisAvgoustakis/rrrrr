@@ -163,6 +163,15 @@ const GeneralSchema = suretype(
         })
         .additional(false)
         .required(),
+      autoReset: v
+        .object({
+          timeoutSeconds: v.number().gte(0).required(),
+          condition: v.string().required(),
+          title: I18nSchema.required(),
+          description: I18nSchema.required(),
+        })
+        .additional(false)
+        .required(),
     })
     .additional(false),
 );
