@@ -117,7 +117,17 @@ watchEffect(() => {
 const modelVisualizations = ref<Array<typeof ModelVisualization>>([]);
 onMounted(() => {
   const tick = (deltaMs: DOMHighResTimeStamp) => {
-    Object.assign(modelSimulator.record, modelStore.record);
+    /**
+     * The current record from the model store can be externally modified,
+     * e.g. through the reset function. To ensure that the simulator is in sync,
+     * some properties are copied over from the model store to the simulator.
+     *
+     * TODO: Refactor the simulator such that is uses the global state directly
+     *       to make syncing unnecessary.
+     */
+    const { parameters } = modelSimulator.record;
+    Object.assign(modelSimulator.record, modelStore.record, { parameters });
+
     const { t: lastT } = modelSimulator.record;
     modelSimulator.tick(deltaMs);
     const { t: currentT } = modelSimulator.record;
