@@ -38,3 +38,4 @@ model:
     repairIncentive: 0.05
     repairRate: 0.9
     reuseIncentive: 0.05
+    userdata: 0

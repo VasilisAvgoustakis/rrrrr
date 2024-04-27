@@ -4,34 +4,80 @@ parameterTransforms:
       phonesPerUserGoal *= 0.9;
       landfillIncentive *= 0.6;
       naturalResourcesIncentive *= 0.6;
+
+      // Initialize userdata if not yet set
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      // Add 1 every time the transform is applied or initialize with 0 if not yet set
+      userdata.reduce = (userdata.reduce ?? 0) + 1;
   - id: reuse
-    script: reuseIncentive *= 3;
+    script: |-
+      reuseIncentive *= 3;
+
+      // Initialize userdata if not yet set
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      // Add 1 every time the transform is applied or initialize with 0 if not yet set
+      userdata.reuse = (userdata.reuse ?? 0) + 1;
   - id: repair
     script: |-
       repairIncentive *= 1.75;
       repairRate *= 1.75;
+
+      // Initialize userdata if not yet set
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      // Add 1 every time the transform is applied or initialize with 0 if not yet set
+      userdata.repair = (userdata.repair ?? 0) + 1;
   - id: refurbish
     script: |-
       refurbishmentIncentive *= 1.75;
       refurbishmentRate *= 1.75;
+
+      // Initialize userdata if not yet set
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      // Add 1 every time the transform is applied or initialize with 0 if not yet set
+      userdata.refurbish = (userdata.refurbish ?? 0) + 1;
   - id: recycle
     script: |-
       recyclingIncentive *= 1.3;
       recycleRate *= 1.3;
+
+
+      // Initialize userdata if not yet set
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      // Add 1 every time the transform is applied or initialize with 0 if not yet set
+      userdata.recycle = (userdata.recycle ?? 0) + 1;
   - id: (T) Triple Diamantglas
-    script: breakRate *= 0.1;
+    script: |-
+      breakRate *= 0.1;
+
+      // Init
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      userdata.technology = (userdata.technology ?? {})
+      // Set flag
+      userdata.technology['(T) Triple Diamantglas'] = true;
   - id: (T) KI-Automatisierung
     script: |-
       newPhoneProductionRate *=5;
       recycleRate *=3;
       refurbishmentRate *=3;
       repairRate *=3;
+
+      // Init
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      userdata.technology = (userdata.technology ?? {})
+      // Set flag
+      userdata.technology['(T) KI-Automatisierung'] = true;
   - id: (T) Modular smartphone
     script: |-
       repairIncentive *= 3;
       refurbishmentIncentive *= 5;
       refurbishmentRate *=2;
       disposeIncentive *=0.7;
+
+      // Init
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      userdata.technology = (userdata.technology ?? {})
+      // Set flag
+      userdata.technology['(T) Modular smartphone'] = true;
   - id: (T) Planed Obsol
     script: |-
       newPhoneProductionRate *=3;
@@ -44,6 +90,12 @@ parameterTransforms:
       disposeIncentive *= 5;
       disposeRate *= 2;
       acquireRate *=2
+
+      // Init
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      userdata.technology = (userdata.technology ?? {})
+      // Set flag
+      userdata.technology['(T) Planed Obsol'] = true;
   - id: (T) Software Upgrade
     script: |-
       newPhoneProductionRate *= 0.9;
@@ -52,6 +104,12 @@ parameterTransforms:
       disposeRate *= 0.5;
       reuseIncentive *= 5;
       abandonRate *= 0.5;
+
+      // Init
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      userdata.technology = (userdata.technology ?? {})
+      // Set flag
+      userdata.technology['(T) Software Upgrade'] = true;
   - id: (P) Schul-Repair-Café
     script: |-
       repairIncentive *= 3;
@@ -59,10 +117,22 @@ parameterTransforms:
       disposeIncentive *= 0.5;
       disposeRate *= 0.5;
       newlyProducedPhoneIncentive *= 0.5;
+
+      // Init
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      userdata.policy = (userdata.policy ?? {})
+      // Set flag
+      userdata.policy['(P) Schul-Repair-Café'] = true;
   - id: (P) Extreme Öko-Steuer
     script: |-
       landfillIncentive *= 0.1;
       naturalResourcesIncentive *= 0.1;
+
+      // Init
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      userdata.policy = (userdata.policy ?? {})
+      // Set flag
+      userdata.policy['(P) Extreme Öko-Steuer'] = true;
   - id: (P) Handy-Abo
     script: |-
       abandonRate *= 5;
@@ -71,6 +141,12 @@ parameterTransforms:
       acquireRate *= 2;
       disposeIncentive *= 3;
       disposeRate *= 2;
+
+      // Init
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      userdata.policy = (userdata.policy ?? {})
+      // Set flag
+      userdata.policy['(P) Handy-Abo'] = true;
   - id: (P) Recycle-Prämie
     script: |-
       abandonRate *= 0.8;
@@ -80,6 +156,12 @@ parameterTransforms:
       recyclingIncentive *= 3;
       repairIncentive *= 0.7;
       reuseIncentive *= 0.7;
+
+      // Init
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      userdata.policy = (userdata.policy ?? {})
+      // Set flag
+      userdata.policy['(P) Recycle-Prämie'] = true;
   - id: (P) Wartungsvertrag
     script: |-
       abandonRate *= 0.5;
@@ -89,11 +171,23 @@ parameterTransforms:
       repairRate *= 2;
       disposeRate *= 0.8;
       disposeIncentive *= 0.8;
+
+      // Init
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      userdata.policy = (userdata.policy ?? {})
+      // Set flag
+      userdata.policy['(P) Wartungsvertrag'] = true;
   - id: (P) Jugendschutz
     script: |-
       acquireRate *= 0.9;
       newPhoneProductionRate *=0.9;
       phonesPerUserGoal *= 0.8;
+
+      // Init
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      userdata.policy = (userdata.policy ?? {})
+      // Set flag
+      userdata.policy['(P) Jugendschutz'] = true;
   - id: (P) Ein-Telefon-Gesetz
     script: |-
       phonesPerUserGoal *= 0.2;
@@ -102,6 +196,12 @@ parameterTransforms:
       abandonRate *= 0.1;
       landfillIncentive *= 0.5;
       naturalResourcesIncentive *= 0.5;
+
+      // Init
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      userdata.policy = (userdata.policy ?? {})
+      // Set flag
+      userdata.policy['(P) Ein-Telefon-Gesetz'] = true;
   - id: (P) BYOD
     script: |-
       phonesPerUserGoal *= 0.8;
@@ -109,6 +209,12 @@ parameterTransforms:
       abandonRate *= 0.5;
       landfillIncentive *= 0.5;
       naturalResourcesIncentive *= 0.5;
+
+      // Init
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      userdata.policy = (userdata.policy ?? {})
+      // Set flag
+      userdata.policy['(P) BYOD'] = true;
   - id: (P) Handy Detox Day
     script: |-
       landfillIncentive *= 0.5;
@@ -117,10 +223,22 @@ parameterTransforms:
       disposeIncentive *=0.8;
       newlyProducedPhoneIncentive *= 0.8;
       phonesPerUserGoal *= 0.8;
+
+      // Init
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      userdata.policy = (userdata.policy ?? {})
+      // Set flag
+      userdata.policy['(P) Handy Detox Day'] = true;
   - id: (E) Weltweite Chip-Krise
     script: |-
       naturalResourcesIncentive *=0.01;
       newPhoneProductionRate *= 1;
+
+      // Init
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      userdata.event = (userdata.event ?? {})
+      // Set flag
+      userdata.event['(E) Weltweite Chip-Krise'] = true;
   - id: (E) Neues Ananas Phone
     script: |-
       abandonRate *= 3;
@@ -129,6 +247,12 @@ parameterTransforms:
       acquireRate *= 2;
       landfillIncentive *= 1.5;
       naturalResourcesIncentive *= 1.5;
+
+      // Init
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      userdata.event = (userdata.event ?? {})
+      // Set flag
+      userdata.event['(E) Neues Ananas Phone'] = true;
   - id: (E) Sicherheitslücke
     script: |-
       abandonExcessRate *=5;
@@ -137,6 +261,12 @@ parameterTransforms:
       disposeRate *=5;
       newlyProducedPhoneIncentive *=15;
       reuseIncentive *= 0.2;
+
+      // Init
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      userdata.event = (userdata.event ?? {})
+      // Set flag
+      userdata.event['(E) Sicherheitslücke'] = true;
   - id: (E) Transport Streik
     script: |-
       landfillRate *= 0.1; 
@@ -149,6 +279,18 @@ parameterTransforms:
       reuseIncentive *= 5; 
       disposeIncentive *=0.5; 
       landfillRate *= 0.1;
+
+      // Init
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      userdata.event = (userdata.event ?? {})
+      // Set flag
+      userdata.event['(E) Transport Streik'] = true;
   - id: (E) Deponie Streik
     script: |-
       landfillRate *= 0.055;
+
+      // Init
+      userdata = typeof userdata === 'number' ? {} : userdata;
+      userdata.event = (userdata.event ?? {})
+      // Set flag
+      userdata.event['(E) Deponie Streik'] = true;
