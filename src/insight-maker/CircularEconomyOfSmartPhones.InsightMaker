@@ -7,7 +7,7 @@
         <mxGeometry x="20" y="20" width="80" height="40" as="geometry" />
       </mxCell>
     </Setting>
-    <Display name="Default Display" Note="" Type="Time Series" xAxis="Time (%u)" yAxis="%o" Primitives="93,98,140,146,147,155,157,163,197,201,102,100,97,94,96,222,224,234,242,251,255,261,263,274,276,160,460" AutoAddPrimitives="true" ScatterplotOrder="X Primitive, Y Primitive" Image="Display" yAxis2="" Primitives2="" showMarkers="false" showLines="true" showArea="false" legendPosition="Automatic" id="3">
+    <Display name="Default Display" Note="" Type="Time Series" xAxis="Time (%u)" yAxis="%o" Primitives="93,98,140,146,147,155,157,163,197,201,102,100,97,94,96,222,224,234,242,251,255,261,263,274,276,160,460,494" AutoAddPrimitives="true" ScatterplotOrder="X Primitive, Y Primitive" Image="Display" yAxis2="" Primitives2="" showMarkers="false" showLines="true" showArea="false" legendPosition="Automatic" id="3">
       <mxCell style="roundImage;image=/builder/images/DisplayFull.png;" parent="1" vertex="1" visible="0">
         <mxGeometry x="50" y="20" width="64" height="64" as="geometry" />
       </mxCell>
@@ -1659,5 +1659,10 @@
         </mxGeometry>
       </mxCell>
     </Link>
+    <Variable name="userdata" Note="" Equation="0" Units="Unitless" MaxConstraintUsed="false" MinConstraintUsed="false" MaxConstraint="100" MinConstraint="0" ShowSlider="true" SliderMax="10" SliderMin="0" SliderStep="0.01" Image="None" FlipHorizontal="false" FlipVertical="false" LabelPosition="Middle" oldId="495" id="495">
+      <mxCell style="variable;shape=rectangle;perimeter=rectanglePerimeter;fillColor=#FF99CC;" vertex="1" parent="1">
+        <mxGeometry x="270" y="200" width="120" height="50" as="geometry" />
+      </mxCell>
+    </Variable>
   </root>
 </InsightMakerModel>

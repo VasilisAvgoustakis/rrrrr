@@ -54,6 +54,7 @@ export interface InitialParametersConfig {
   repairIncentive: number;
   repairRate: number;
   reuseIncentive: number;
+  userdata: number;
 }
 
 export interface InitialStocksConfig {

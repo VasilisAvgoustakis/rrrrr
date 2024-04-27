@@ -98,6 +98,7 @@ const parameterIds = [
   'repairIncentive',
   'repairRate',
   'reuseIncentive',
+  'userdata',
 ] as const;
 
 type StockIds = typeof stockIds;
@@ -169,6 +170,7 @@ class CircularEconomyModel extends Model<
     repairIncentive: 0.5,
     repairRate: 1,
     reuseIncentive: 0.86,
+    userdata: 0,
   };
 
   constructor() {
@@ -217,6 +219,7 @@ class CircularEconomyModel extends Model<
       repairIncentive,
       repairRate,
       reuseIncentive,
+      userdata,
     } = parameters;
 
     const phoneGoal = numberOfUsers * phonesPerUserGoal;
