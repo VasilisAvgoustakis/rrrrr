@@ -5,12 +5,14 @@ import { HOTKEYS } from '../../ts/builtin-config';
 import { useAppStore } from '../../ts/stores/app';
 import { useModelStore } from '../../ts/stores/model';
 
-const togglePlayingBtnId = `btn-toggle-playing-${uuidv4()}`;
-const toggleFullscreenBtnId = `btn-toggle-playing-${uuidv4()}`;
-const toggleDeveloperModeBtnId = `btn-toggle-playing-${uuidv4()}`;
-const toggleHighlightDerivativesBtnId = `btn-toggle-playing-${uuidv4()}`;
-const toggleMarkerSlotLabelsBtnId = `btn-toggle-marker-slot-labels-${uuidv4()}`;
-const toggleAutoResetBtnId = `btn-toggle-auto-reset-${uuidv4()}`;
+const uuid = uuidv4();
+
+const togglePlayingBtnId = `btn-toggle-playing-${uuid}`;
+const toggleFullscreenBtnId = `btn-toggle-fullscreen-${uuid}`;
+const toggleDeveloperModeBtnId = `btn-toggle-dev-mode-${uuid}`;
+const toggleHighlightDerivativesBtnId = `btn-toggle-highlight-derivatives-${uuid}`;
+const toggleMarkerSlotLabelsBtnId = `btn-toggle-marker-slot-labels-${uuid}`;
+const toggleAutoResetBtnId = `btn-toggle-auto-reset-${uuid}`;
 
 const appStore = useAppStore();
 const modelStore = useModelStore();
