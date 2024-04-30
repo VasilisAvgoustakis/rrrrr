@@ -20,6 +20,8 @@ const props = defineProps<{
   readonly slotGroupId: string;
   readonly primaryLabel: string;
   readonly secondaryLabel: string;
+  readonly activeUrl: string;
+  readonly inactiveUrl: string;
   readonly slotConfig: DeepReadonly<SlotConfig>;
 }>();
 
@@ -28,15 +30,9 @@ const { slotConfig } = props;
 const slotGroupId = ref(props.slotGroupId);
 const slotId = `${slotGroupId.value}-${slotConfig.id}`;
 
-const {
-  config: {
-    interaction: { assets },
-  },
-  toAssetUrl,
-  extractAssetPosition,
-} = useConfigStore();
-const markerSlotActiveUrl = toAssetUrl(assets.markerSlotActive.url);
-const markerSlotInactiveUrl = toAssetUrl(assets.markerSlotInactive.url);
+const { toAssetUrl, extractAssetPosition } = useConfigStore();
+const markerSlotActiveUrl = toAssetUrl(props.activeUrl);
+const markerSlotInactiveUrl = toAssetUrl(props.inactiveUrl);
 const markerSlotActivePosition = extractAssetPosition(markerSlotActiveUrl);
 const markerSlotInactivePosition = extractAssetPosition(markerSlotInactiveUrl);
 

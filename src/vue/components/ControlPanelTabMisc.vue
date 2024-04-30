@@ -1,19 +1,25 @@
 <script setup lang="ts">
 import { v4 as uuidv4 } from 'uuid';
 
+import type { ScaleFactors } from '../../ts/stores/visualization';
+
 import { HOTKEYS } from '../../ts/builtin-config';
 import { useAppStore } from '../../ts/stores/app';
 import { useModelStore } from '../../ts/stores/model';
+import { useVisualizationStore } from '../../ts/stores/visualization';
 
-const togglePlayingBtnId = `btn-toggle-playing-${uuidv4()}`;
-const toggleFullscreenBtnId = `btn-toggle-playing-${uuidv4()}`;
-const toggleDeveloperModeBtnId = `btn-toggle-playing-${uuidv4()}`;
-const toggleHighlightDerivativesBtnId = `btn-toggle-playing-${uuidv4()}`;
-const toggleMarkerSlotLabelsBtnId = `btn-toggle-marker-slot-labels-${uuidv4()}`;
-const toggleAutoResetBtnId = `btn-toggle-auto-reset-${uuidv4()}`;
+const uuid = uuidv4();
+
+const togglePlayingBtnId = `btn-toggle-playing-${uuid}`;
+const toggleFullscreenBtnId = `btn-toggle-fullscreen-${uuid}`;
+const toggleDeveloperModeBtnId = `btn-toggle-dev-mode-${uuid}`;
+const toggleHighlightDerivativesBtnId = `btn-toggle-highlight-derivatives-${uuid}`;
+const toggleMarkerSlotLabelsBtnId = `btn-toggle-marker-slot-labels-${uuid}`;
+const toggleAutoResetBtnId = `btn-toggle-auto-reset-${uuid}`;
 
 const appStore = useAppStore();
 const modelStore = useModelStore();
+const visualizationStore = useVisualizationStore();
 
 const togglePlaying = () => appStore.$patch({ isPlaying: !appStore.isPlaying });
 
@@ -38,6 +44,10 @@ const resetModel = () => modelStore.reset();
 const toggleAutoReset = () => {
   appStore.$patch({ autoReset: !appStore.autoReset });
 };
+
+const scaleFactorKeys = Object.keys(
+  visualizationStore.scaleFactors,
+) as (keyof ScaleFactors)[];
 </script>
 
 <template>
@@ -120,11 +130,38 @@ const toggleAutoReset = () => {
     @click="toggleAutoReset"
     >Enable auto-reset</label
   >
+  <br />
+  <form class="scale-factors">
+    <template v-for="key in scaleFactorKeys" :key="key">
+      <p>
+        <label :for="`viz-scale-factors-${key}-${uuid}`">{{ key }}:</label>
+        <input
+          type="number"
+          :id="`viz-scale-factors-${key}-${uuid}`"
+          v-model="visualizationStore.scaleFactors[key]"
+        />
+      </p>
+    </template>
+  </form>
 </template>
 
 <style scoped lang="scss">
 .btn,
 .btn-check {
   margin-bottom: 0.5rem;
+}
+
+.scale-factors {
+  display: table;
+
+  & > p {
+    display: table-row;
+    & > label {
+      display: table-cell;
+    }
+    & > input {
+      display: table-cell;
+    }
+  }
 }
 </style>

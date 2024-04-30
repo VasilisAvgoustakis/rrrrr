@@ -14,10 +14,12 @@ import { type Record, type StockId } from '../../ts/circular-economy-model';
 import { BOARD_WIDTH, BOARD_HEIGHT } from '../../ts/builtin-config';
 import { useAppStore } from '../../ts/stores/app';
 import { useModelStore } from '../../ts/stores/model';
+import { useVisualizationStore } from '../../ts/stores/visualization';
 import { stockIds } from '../../ts/circular-economy-model';
 import { loadSvg } from '../../ts/util/load-svg';
 import { getCircleCenter } from '../../ts/util/geometry/svg';
 import { guardedQuerySelector } from '../../ts/util/guarded-query-selectors';
+import { storeToRefs } from 'pinia';
 
 const svgUrl = new URL('../../svg/model.svg', import.meta.url);
 const uuid = uuid4();
@@ -79,18 +81,14 @@ const flowVizSigns: ModelElementObject<MainFlowIds> = {
   repair: -1,
 } as const;
 
-const scaleFactors = {
-  global: 30000,
-  stocks: 1,
-  flows: 0.001,
-  flowHighlight: 10,
-};
-
 const svgPromise = loadSvg(svgUrl);
 
 const appStore = useAppStore();
 
 const modelStore = useModelStore();
+
+const visualizationStore = useVisualizationStore();
+const { scaleFactors } = storeToRefs(visualizationStore);
 
 const updateInfo = ref({
   deltaMs: 0,
@@ -154,7 +152,7 @@ const useFlowToHighlight = (flowId: MainFlowId) => {
     const flow = record.flows[flowId];
     const flowDerivative = (flow - previousFlow) / stepSize;
     const scaledFlowDerivative =
-      scaleFactors.flowHighlight * flowVizScale * flowDerivative;
+      scaleFactors.value.flowHighlight * flowVizScale * flowDerivative;
 
     // TODO: fine-tune formula
     const highlight =
@@ -258,12 +256,9 @@ const update = (
   record: Record,
 ) => {
   const flowVizScale =
-    stepSize *
-    ((scaleFactors.global * scaleFactors.flows) /
-      record.parameters.numberOfUsers);
+    scaleFactors.value.flow / record.parameters.numberOfUsers;
   const stockVizScale =
-    (scaleFactors.global * scaleFactors.stocks) /
-    record.parameters.numberOfUsers;
+    scaleFactors.value.stock / record.parameters.numberOfUsers;
   updateInfo.value = { deltaMs, stepSize, flowVizScale, stockVizScale, record };
 };
 

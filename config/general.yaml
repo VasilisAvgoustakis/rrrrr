@@ -2,6 +2,17 @@ general:
   assetBaseDir: config/assets
   primaryLanguage: de
   secondaryLanguage: en
+  description:
+    # The following strings utilize special UTF-8 spacing characters
+    # that might not be displayed correctly in all text editors.
+    en: |+
+      Can you create a circular
+      smartphone economy?
+
+    de: |-
+      Kannst du eine
+      Kreislaufwirtschaft
+      für  Handies  aufbauen?
   scoreLabels:
     circularity:
       en: Circularity

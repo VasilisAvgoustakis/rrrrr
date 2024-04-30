@@ -40,6 +40,8 @@ const secondaryLabel = getSecondary(slotGroupConfig.label);
       :primary-label="primaryLabel"
       :secondary-label="secondaryLabel"
       :slot-config="markerSlotConfig"
+      :active-url="slotGroupConfig.assets.markerSlotActive.url"
+      :inactive-url="slotGroupConfig.assets.markerSlotInactive.url"
       @activate="isMarkerSlotActive = true"
       @deactivate="isMarkerSlotActive = false"
     />

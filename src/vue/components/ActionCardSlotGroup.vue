@@ -131,6 +131,8 @@ slotsWithCard.forEach((slotWithCard) => {
       :slot-group-id="slotGroupConfig.id"
       :primary-label="primaryLabel"
       :secondary-label="secondaryLabel"
+      :active-url="slotGroupConfig.assets.markerSlotActive.url"
+      :inactive-url="slotGroupConfig.assets.markerSlotInactive.url"
       :slot-config="slotWithCard.slotConfig.markerSlot"
       @activate="slotWithCard.active.value = true"
       @deactivate="slotWithCard.active.value = false"

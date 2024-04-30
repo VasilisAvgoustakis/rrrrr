@@ -15,13 +15,10 @@ export interface GeneralConfig {
   assetBaseDir: string;
   primaryLanguage: string;
   secondaryLanguage: string;
+  description: I18nConfig;
   scoreLabels: {
-    circularity: {
-      [key: string]: string;
-    };
-    coverage: {
-      [key: string]: string;
-    };
+    circularity: I18nConfig;
+    coverage: I18nConfig;
   };
   autoReset: {
     timeoutSeconds: number;
@@ -80,6 +77,15 @@ export interface ParameterTransformConfig {
   script: string;
 }
 
+export interface SlotGroupAssetConfig {
+  markerSlotActive: {
+    url: string;
+  };
+  markerSlotInactive: {
+    url: string;
+  };
+}
+
 export interface MarkerSlotConfig {
   id: string;
   x: number;
@@ -91,6 +97,7 @@ export interface BasicSlotGroupConfig {
   id: string;
   type: 'basic';
   label: I18nConfig;
+  assets: SlotGroupAssetConfig;
   slots: MarkerSlotConfig[];
   parameterTransformIds: string[];
 }
@@ -111,6 +118,7 @@ export interface ActionCardSlotGroupConfig {
   id: string;
   type: 'action-card';
   label: I18nConfig;
+  assets: SlotGroupAssetConfig;
   slots: {
     markerSlot: MarkerSlotConfig;
     cardSlot: CardSlotConfig;
@@ -122,6 +130,7 @@ export interface EventCardSlotGroupConfig {
   id: string;
   type: 'event-card';
   label: I18nConfig;
+  assets: SlotGroupAssetConfig;
   markerSlot: MarkerSlotConfig;
   cardSlots: CardSlotConfig[];
   cards: CardConfig[];
@@ -138,14 +147,6 @@ export interface InteractionConfig {
   eventCardMaxDelayMs: number;
   eventCardMinDurationMs: number;
   eventCardMaxDurationMs: number;
-  assets: {
-    markerSlotActive: {
-      url: string;
-    };
-    markerSlotInactive: {
-      url: string;
-    };
-  };
   slotGroups: SlotGroup[];
 }
 
