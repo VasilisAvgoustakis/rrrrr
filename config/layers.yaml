@@ -4,8 +4,6 @@ layers:
   - url: repair_background_x1156_y468.webp
     condition: 'true'
   - modelVisualization
-  - url: repair_backgroundhack_x1282_y517.webp
-    condition: 'true'
   - url: refurbish_shop_x2419_y1433.webp
     condition: 'true'
   - url: government_x879_y1707.webp
