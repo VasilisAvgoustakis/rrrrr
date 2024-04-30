@@ -172,10 +172,11 @@ const GeneralSchema = suretype(
       assetBaseDir: v.string().required(),
       primaryLanguage: v.string().required(),
       secondaryLanguage: v.string().required(),
+      description: I18nSchema.required(),
       scoreLabels: v
         .object({
-          circularity: v.object({}).additional(v.string()).required(),
-          coverage: v.object({}).additional(v.string()).required(),
+          circularity: I18nSchema.required(),
+          coverage: I18nSchema.required(),
         })
         .additional(false)
         .required(),

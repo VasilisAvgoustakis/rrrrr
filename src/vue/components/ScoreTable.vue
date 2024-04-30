@@ -12,7 +12,7 @@ const {
   getPrimary,
   getSecondary,
 } = useConfigStore();
-const { scoreLabels } = general;
+const { description, scoreLabels } = general;
 const { circularity: circularityLabels, coverage: coverageLabels } =
   scoreLabels;
 
@@ -54,6 +54,11 @@ const format = (score: number) => {
 <template>
   <div class="scores">
     <table class="score-table">
+      <tr>
+        <td colspan="2" class="primary-text header">
+          {{ getPrimary(description).value }}
+        </td>
+      </tr>
       <template v-for="{ score, primaryLabel, secondaryLabel } in scores">
         <tr>
           <td class="label-column">
@@ -65,6 +70,11 @@ const format = (score: number) => {
           </td>
         </tr>
       </template>
+      <tr>
+        <td colspan="2" class="secondary-text footer">
+          {{ getSecondary(description).value }}
+        </td>
+      </tr>
     </table>
   </div>
 </template>
@@ -79,7 +89,7 @@ const format = (score: number) => {
   background-color: black;
   border-radius: 50%;
   color: white;
-  font-size: 21px;
+  font-size: 16px;
   line-height: 1.2;
   text-transform: uppercase;
   white-space: pre;
@@ -95,7 +105,20 @@ const format = (score: number) => {
 
 table {
   border-collapse: separate;
-  border-spacing: 1ex 1em;
+  border-spacing: 1ex 1.2em;
+}
+
+.header {
+  padding-bottom: 1em;
+}
+
+.footer {
+  padding-top: 1em;
+}
+
+tr:first-child > td,
+tr:last-child > td {
+  text-align: center;
 }
 
 td {
@@ -108,7 +131,7 @@ td {
 
 .score-value {
   display: inline-block;
-  width: 8ex;
+  width: 19ex;
   text-align: right;
 }
 </style>

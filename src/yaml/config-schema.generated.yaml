@@ -60,17 +60,15 @@ definitions:
         type: string
       secondaryLanguage:
         type: string
+      description:
+        $ref: '#/definitions/I18nConfig'
       scoreLabels:
         type: object
         properties:
           circularity:
-            type: object
-            additionalProperties:
-              type: string
+            $ref: '#/definitions/I18nConfig'
           coverage:
-            type: object
-            additionalProperties:
-              type: string
+            $ref: '#/definitions/I18nConfig'
         required:
           - circularity
           - coverage
@@ -97,6 +95,7 @@ definitions:
       - assetBaseDir
       - primaryLanguage
       - secondaryLanguage
+      - description
       - scoreLabels
       - autoReset
     additionalProperties: false

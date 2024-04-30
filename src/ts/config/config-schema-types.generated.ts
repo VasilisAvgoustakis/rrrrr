@@ -15,13 +15,10 @@ export interface GeneralConfig {
   assetBaseDir: string;
   primaryLanguage: string;
   secondaryLanguage: string;
+  description: I18nConfig;
   scoreLabels: {
-    circularity: {
-      [key: string]: string;
-    };
-    coverage: {
-      [key: string]: string;
-    };
+    circularity: I18nConfig;
+    coverage: I18nConfig;
   };
   autoReset: {
     timeoutSeconds: number;
