@@ -4,17 +4,17 @@ interaction:
   eventCardMaxDelayMs: 20000
   eventCardMinDurationMs: 30000
   eventCardMaxDurationMs: 60000
-  assets:
-    markerSlotActive:
-      url: slots/marker-slot-active_x-121_y-121.webp
-    markerSlotInactive:
-      url: slots/marker-slot-inactive_x-121_y-121.webp
   slotGroups:
     - id: technology
       type: action-card
       label:
         de: Technologie
         en: Technology
+      assets:
+        markerSlotActive:
+          url: slots/marker-slot-active_x-121_y-121.webp
+        markerSlotInactive:
+          url: slots/marker-slot-inactive_x-121_y-121.webp
       slots:
         - markerSlot: { id: technology-ms-1, x: 186, y: 744, angle: 90 }
           cardSlot: { id: technology-cs-1, x: 548, y: 635, angle: 90 }
@@ -38,6 +38,11 @@ interaction:
       label:
         de: Regelung
         en: Policy
+      assets:
+        markerSlotActive:
+          url: slots/marker-slot-active_x-121_y-121.webp
+        markerSlotInactive:
+          url: slots/marker-slot-inactive_x-121_y-121.webp
       slots:
         - markerSlot: { id: policy-ms-1, x: 1408, y: 2007, angle: 0 }
           cardSlot: { id: policy-cs-1, x: 1299, y: 1645, angle: 0 }
@@ -69,6 +74,11 @@ interaction:
       label:
         de: Ereignisse
         en: Events
+      assets:
+        markerSlotActive:
+          url: slots/marker-slot-active_x-121_y-121.webp
+        markerSlotInactive:
+          url: slots/marker-slot-inactive_x-121_y-121.webp
       markerSlot: { id: event-ms-1, x: 2211, y: 216, angle: 180 }
       cardSlots:
         - { id: event-cs-1, x: 2075, y: 324, angle: 180 }
@@ -90,6 +100,11 @@ interaction:
       label:
         de: Reduzieren
         en: Reduce
+      assets:
+        markerSlotActive:
+          url: slots/marker-slot-active_x-121_y-121.webp
+        markerSlotInactive:
+          url: slots/marker-slot-inactive_x-121_y-121.webp
       slots:
         - { id: reduce-ms-1, x: 1574, y: 1171, angle: 0 }
         - { id: reduce-ms-2, x: 1821, y: 1234, angle: 0 }
@@ -102,6 +117,11 @@ interaction:
           Wieder-
           verwenden
         en: Reuse
+      assets:
+        markerSlotActive:
+          url: slots/marker-slot-active_x-121_y-121.webp
+        markerSlotInactive:
+          url: slots/marker-slot-inactive_x-121_y-121.webp
       slots:
         - { id: reuse-ms-1, x: 3626, y: 902, angle: -90 }
         - { id: reuse-ms-2, x: 3634, y: 1155, angle: -90 }
@@ -112,6 +132,11 @@ interaction:
       label:
         de: Reparieren
         en: Repair
+      assets:
+        markerSlotActive:
+          url: slots/marker-slot-active_x-121_y-121.webp
+        markerSlotInactive:
+          url: slots/marker-slot-inactive_x-121_y-121.webp
       slots:
         - { id: repair-ms-1, x: 1413, y: 904, angle: 180 }
         - { id: repair-ms-2, x: 1646, y: 798, angle: 180 }
@@ -122,6 +147,11 @@ interaction:
       label:
         de: Erneuern
         en: Refurbish
+      assets:
+        markerSlotActive:
+          url: slots/marker-slot-active_x-121_y-121.webp
+        markerSlotInactive:
+          url: slots/marker-slot-inactive_x-121_y-121.webp
       slots:
         - { id: refurbish-ms-1, x: 2686, y: 1884, angle: 0 }
         - { id: refurbish-ms-2, x: 2935, y: 1829, angle: 0 }
@@ -134,6 +164,11 @@ interaction:
           Wieder-
           verwerten
         en: Recycle
+      assets:
+        markerSlotActive:
+          url: slots/marker-slot-active_x-121_y-121.webp
+        markerSlotInactive:
+          url: slots/marker-slot-inactive_x-121_y-121.webp
       slots:
         - { id: recycle-ms-1, x: 507, y: 476, angle: 180 }
         - { id: recycle-ms-2, x: 709, y: 320, angle: 180 }

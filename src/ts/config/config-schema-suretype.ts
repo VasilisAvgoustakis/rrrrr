@@ -3,6 +3,9 @@ import { stockIds, parameterIds } from '../circular-economy-model';
 
 const POSITIONAL_ASSET_REGEX = /_x[+-]?[0-9]+_y[+-]?[0-9]+\.[a-zA-Z0-9]+$/g;
 const AssetUrlSchema = v.string().matches(POSITIONAL_ASSET_REGEX);
+const AssetUrlObjectSchema = v
+  .object({ url: AssetUrlSchema.required() })
+  .additional(false);
 
 const I18nSchema = suretype(
   { name: 'I18nConfig' },
@@ -71,6 +74,16 @@ const CardSchema = suretype(
 
 const SlotGroupIdSchema = v.string().matches(/^((?!internal).)*$/g);
 
+const SlotGroupAssetSchema = suretype(
+  { name: 'SlotGroupAssetConfig' },
+  v
+    .object({
+      markerSlotActive: AssetUrlObjectSchema.required(),
+      markerSlotInactive: AssetUrlObjectSchema.required(),
+    })
+    .additional(false),
+);
+
 const BasicSlotGroupSchema = suretype(
   { name: 'BasicSlotGroupConfig' },
   v
@@ -78,6 +91,7 @@ const BasicSlotGroupSchema = suretype(
       id: SlotGroupIdSchema.required(),
       type: v.string().enum('basic').required(),
       label: I18nSchema.required(),
+      assets: SlotGroupAssetSchema.required(),
       slots: v.array(MarkerSlotSchema).required(),
       parameterTransformIds: v.array(v.string()).required(),
     })
@@ -91,6 +105,7 @@ const ActionCardSlotGroupSchema = suretype(
       id: SlotGroupIdSchema.required(),
       type: v.string().enum('action-card').required(),
       label: I18nSchema.required(),
+      assets: SlotGroupAssetSchema.required(),
       slots: v
         .array(
           v
@@ -113,6 +128,7 @@ const EventCardSlotGroupSchema = suretype(
       id: SlotGroupIdSchema.required(),
       type: v.string().enum('event-card').required(),
       label: I18nSchema.required(),
+      assets: SlotGroupAssetSchema.required(),
       markerSlot: MarkerSlotSchema.required(),
       cardSlots: v.array(CardSlotSchema).required(),
       cards: v.array(CardSchema).required(),
@@ -176,10 +192,6 @@ const GeneralSchema = suretype(
     .additional(false),
 );
 
-const AssetUrlObjectSchema = v
-  .object({ url: AssetUrlSchema.required() })
-  .additional(false);
-
 const InteractionSchema = suretype(
   { name: 'InteractionConfig' },
   v
@@ -189,13 +201,6 @@ const InteractionSchema = suretype(
       eventCardMaxDelayMs: v.number().gte(0).required(),
       eventCardMinDurationMs: v.number().gte(0).required(),
       eventCardMaxDurationMs: v.number().gte(0).required(),
-      assets: v
-        .object({
-          markerSlotActive: AssetUrlObjectSchema.required(),
-          markerSlotInactive: AssetUrlObjectSchema.required(),
-        })
-        .additional(false)
-        .required(),
       slotGroups: v.array(SlotGroupSchema).required(),
     })
     .additional(false),

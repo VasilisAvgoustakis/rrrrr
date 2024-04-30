@@ -235,6 +235,31 @@ definitions:
       - id
       - script
     additionalProperties: false
+  SlotGroupAssetConfig:
+    type: object
+    properties:
+      markerSlotActive:
+        type: object
+        properties:
+          url:
+            type: string
+            pattern: _x[+-]?[0-9]+_y[+-]?[0-9]+\.[a-zA-Z0-9]+$
+        required:
+          - url
+        additionalProperties: false
+      markerSlotInactive:
+        type: object
+        properties:
+          url:
+            type: string
+            pattern: _x[+-]?[0-9]+_y[+-]?[0-9]+\.[a-zA-Z0-9]+$
+        required:
+          - url
+        additionalProperties: false
+    required:
+      - markerSlotActive
+      - markerSlotInactive
+    additionalProperties: false
   MarkerSlotConfig:
     type: object
     properties:
@@ -264,6 +289,8 @@ definitions:
           - basic
       label:
         $ref: '#/definitions/I18nConfig'
+      assets:
+        $ref: '#/definitions/SlotGroupAssetConfig'
       slots:
         type: array
         items:
@@ -276,6 +303,7 @@ definitions:
       - id
       - type
       - label
+      - assets
       - slots
       - parameterTransformIds
     additionalProperties: false
@@ -319,6 +347,8 @@ definitions:
           - action-card
       label:
         $ref: '#/definitions/I18nConfig'
+      assets:
+        $ref: '#/definitions/SlotGroupAssetConfig'
       slots:
         type: array
         items:
@@ -340,6 +370,7 @@ definitions:
       - id
       - type
       - label
+      - assets
       - slots
       - cards
     additionalProperties: false
@@ -355,6 +386,8 @@ definitions:
           - event-card
       label:
         $ref: '#/definitions/I18nConfig'
+      assets:
+        $ref: '#/definitions/SlotGroupAssetConfig'
       markerSlot:
         $ref: '#/definitions/MarkerSlotConfig'
       cardSlots:
@@ -369,6 +402,7 @@ definitions:
       - id
       - type
       - label
+      - assets
       - markerSlot
       - cardSlots
       - cards
@@ -396,31 +430,6 @@ definitions:
       eventCardMaxDurationMs:
         type: number
         minimum: 0
-      assets:
-        type: object
-        properties:
-          markerSlotActive:
-            type: object
-            properties:
-              url:
-                type: string
-                pattern: _x[+-]?[0-9]+_y[+-]?[0-9]+\.[a-zA-Z0-9]+$
-            required:
-              - url
-            additionalProperties: false
-          markerSlotInactive:
-            type: object
-            properties:
-              url:
-                type: string
-                pattern: _x[+-]?[0-9]+_y[+-]?[0-9]+\.[a-zA-Z0-9]+$
-            required:
-              - url
-            additionalProperties: false
-        required:
-          - markerSlotActive
-          - markerSlotInactive
-        additionalProperties: false
       slotGroups:
         type: array
         items:
@@ -431,7 +440,6 @@ definitions:
       - eventCardMaxDelayMs
       - eventCardMinDurationMs
       - eventCardMaxDurationMs
-      - assets
       - slotGroups
     additionalProperties: false
   ModelVisualizationLayerConfig:

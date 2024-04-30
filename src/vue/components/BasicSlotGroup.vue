@@ -41,6 +41,8 @@ watchEffect(() =>
       :slot-group-id="slotGroupConfig.id"
       :primary-label="primaryLabel"
       :secondary-label="secondaryLabel"
+      :active-url="slotGroupConfig.assets.markerSlotActive.url"
+      :inactive-url="slotGroupConfig.assets.markerSlotInactive.url"
       :slot-config="slotConfig"
       @activate="numActive += 1"
       @deactivate="numActive -= 1"
