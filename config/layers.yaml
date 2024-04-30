@@ -20,6 +20,8 @@ layers:
     condition: 'stocks.supplyOfBrokenPhones > 700000'
   - url: broken_cell3_x2307_y801.webp
     condition: 'stocks.supplyOfBrokenPhones > 1300000'
+  - url: factory-building_x692_y1343.webp
+    condition: 'true'
   - url: factory_pipe_x673_y997.webp
     condition: 'true'
   - url: factory_workerright_x542_y1039.webp
@@ -27,8 +29,6 @@ layers:
   - url: factory_workers1_x589_y905.webp
     condition: 'true'
   - url: factory_workermiddle_x568_y1077.webp
-    condition: 'true'
-  - url: factory-building_x692_y1343.webp
     condition: 'true'
   - url: handiesgarbage_people_x2594_y417.webp
     condition: 'true'
@@ -117,18 +117,18 @@ layers:
     condition: 'true'
   - url: repair_man1_x1399_y432.webp
     condition: 'true'
-  - url: reuse_drawer_x2912_y890.webp
+  - url: reuse_window_x2837_y914.webp
     condition: 'true'
-  - url: reuse_foldphone_x3200_y772.webp
-    condition: 'stocks.supplyOfHibernatingPhones > 10000'
-  - url: reuse_pool_x3211_y1028.webp
+  - url: reuse_drawer_x2912_y890.webp
     condition: 'true'
   - url: reuse_R_x3170_y997.webp
     condition: 'true'
+  - url: reuse_pool_x3211_y1028.webp
+    condition: 'true'
   - url: reuse_poolanim_x3211_y1028.webp
     condition: 'stocks.supplyOfHibernatingPhones > 300000'
-  - url: reuse_window_x2837_y914.webp
-    condition: 'true'
+  - url: reuse_foldphone_x3200_y772.webp
+    condition: 'stocks.supplyOfHibernatingPhones > 10000'
   - url: easteregg_darthvader_x2076_y1896.webp
     condition: 'new Date().getDate() === 4 && (new Date().getMonth()+1) === 5'
   - url: easteregg_georgeharrison_x2234_y991.webp
