@@ -184,7 +184,6 @@ watch(
     text-transform: uppercase;
     white-space: pre-line;
     font-size: 20px;
-    line-height: 1.2;
     color: black;
   }
 

@@ -30,14 +30,20 @@ body {
   display: none;
 }
 
-.primary-text {
+@mixin text {
   font-family: 'Jost', sans-serif;
-  font-weight: 700;
   line-height: 1.2;
+  letter-spacing: 0.1em;
+}
+
+.primary-text {
+  @include text;
+
+  font-weight: 700;
 }
 
 .secondary-text {
-  font-family: 'Jost', sans-serif;
+  @include text;
+
   font-weight: 500;
-  line-height: 1.2;
 }

@@ -5,14 +5,12 @@ general:
   description:
     # The following strings utilize special UTF-8 spacing characters
     # that might not be displayed correctly in all text editors.
-    en: |+
-      Can you create a circular
-      smartphone economy?
-
+    en: |-
+      Create a circular
+      economy!
     de: |-
-      Kannst du eine
-      Kreislaufwirtschaft
-      für  Handys  aufbauen?
+      Entwickle eine
+      Kreislaufwirtschaft!
   scoreLabels:
     circularity:
       en: Circularity
