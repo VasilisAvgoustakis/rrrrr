@@ -12,7 +12,7 @@ interaction:
         en: Technology
       assets:
         markerSlotActive:
-          url: slots/marker-slot-active_x-121_y-121.webp
+          url: slots/marker-slot-yellow_x-121_y-121.webp
         markerSlotInactive:
           url: slots/marker-slot-inactive_x-121_y-121.webp
       slots:
@@ -40,7 +40,7 @@ interaction:
         en: Policy
       assets:
         markerSlotActive:
-          url: slots/marker-slot-active_x-121_y-121.webp
+          url: slots/marker-slot-yellow_x-121_y-121.webp
         markerSlotInactive:
           url: slots/marker-slot-inactive_x-121_y-121.webp
       slots:
@@ -76,7 +76,7 @@ interaction:
         en: Events
       assets:
         markerSlotActive:
-          url: slots/marker-slot-active_x-121_y-121.webp
+          url: slots/marker-slot-yellow_x-121_y-121.webp
         markerSlotInactive:
           url: slots/marker-slot-inactive_x-121_y-121.webp
       markerSlot: { id: event-ms-1, x: 2211, y: 216, angle: 180 }
@@ -102,7 +102,7 @@ interaction:
         en: Reduce
       assets:
         markerSlotActive:
-          url: slots/marker-slot-active_x-121_y-121.webp
+          url: slots/marker-slot-cyan_x-121_y-121.webp
         markerSlotInactive:
           url: slots/marker-slot-inactive_x-121_y-121.webp
       slots:
@@ -119,7 +119,7 @@ interaction:
         en: Reuse
       assets:
         markerSlotActive:
-          url: slots/marker-slot-active_x-121_y-121.webp
+          url: slots/marker-slot-cyan_x-121_y-121.webp
         markerSlotInactive:
           url: slots/marker-slot-inactive_x-121_y-121.webp
       slots:
@@ -134,7 +134,7 @@ interaction:
         en: Repair
       assets:
         markerSlotActive:
-          url: slots/marker-slot-active_x-121_y-121.webp
+          url: slots/marker-slot-cyan_x-121_y-121.webp
         markerSlotInactive:
           url: slots/marker-slot-inactive_x-121_y-121.webp
       slots:
@@ -149,7 +149,7 @@ interaction:
         en: Refurbish
       assets:
         markerSlotActive:
-          url: slots/marker-slot-active_x-121_y-121.webp
+          url: slots/marker-slot-cyan_x-121_y-121.webp
         markerSlotInactive:
           url: slots/marker-slot-inactive_x-121_y-121.webp
       slots:
@@ -166,7 +166,7 @@ interaction:
         en: Recycle
       assets:
         markerSlotActive:
-          url: slots/marker-slot-active_x-121_y-121.webp
+          url: slots/marker-slot-cyan_x-121_y-121.webp
         markerSlotInactive:
           url: slots/marker-slot-inactive_x-121_y-121.webp
       slots:
