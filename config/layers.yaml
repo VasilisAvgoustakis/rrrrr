@@ -20,6 +20,8 @@ layers:
     condition: 'stocks.supplyOfBrokenPhones > 700000'
   - url: broken_cell3_x2307_y801.webp
     condition: 'stocks.supplyOfBrokenPhones > 1300000'
+  - url: factory-smoke_x958_y1363.webp
+    condition: 'true'
   - url: factory-building_x692_y1343.webp
     condition: 'true'
   - url: factory_pipe_x673_y997.webp
@@ -34,6 +36,12 @@ layers:
     condition: 'true'
   - url: handiesgarbage_x2736_y435.webp
     condition: 'true'
+  - url: garbage-pile1_x2890_y429.webp
+    condition: 'stocks.supplyOfDisposedPhones > 700000'
+  - url: garbage-pile2_x2819_y425.webp
+    condition: 'stocks.supplyOfDisposedPhones > 3000000'
+  - url: garbage_pile3_x2881_y432.webp
+    condition: 'stocks.supplyOfDisposedPhones > 10000000'
   - url: landfill_static_x3384_y-4.webp
     condition: 'true'
   - url: nature_static_x-8_y1644.webp
@@ -105,6 +113,8 @@ layers:
     condition: 'true'
   - url: refurbish_man1_x2443_y1546.webp
     condition: 'parameters.userdata.refurbish >= 0.5'
+  - url: refurbish-pile1_x2509_y1661.webp
+    condition: 'parameters.userdata.refurbish >= 1.5'
   - url: repair_background_x1156_y468.webp
     condition: 'false'
   - url: repair_gangster_x1206_y568.webp
@@ -125,8 +135,16 @@ layers:
     condition: 'true'
   - url: reuse_pool_x3211_y1028.webp
     condition: 'true'
-  - url: reuse_poolanim_x3211_y1028.webp
+  - url: reuse_handy04_x3219_y1145.webp
     condition: 'stocks.supplyOfHibernatingPhones > 300000'
+  - url: reuse_handy03_x3271_y1094.webp
+    condition: 'stocks.supplyOfHibernatingPhones > 500000'
+  - url: reuse_handy01_x3211_y1081.webp
+    condition: 'stocks.supplyOfHibernatingPhones > 1000000'
+  - url: reuse_handy02_x3256_y1042.webp
+    condition: 'stocks.supplyOfHibernatingPhones > 1500000'
+  - url: reuse_poolanim_x3211_y1028.webp
+    condition: 'stocks.supplyOfHibernatingPhones > 30000'
   - url: reuse_foldphone_x3200_y772.webp
     condition: 'stocks.supplyOfHibernatingPhones > 10000'
   - url: easteregg_darthvader_x2076_y1896.webp
