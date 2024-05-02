@@ -16,10 +16,10 @@ const props = defineProps<{
 }>();
 
 const { extractAssetPosition, toAssetUrl } = useConfigStore();
-const { record } = useModelStore();
+const modelStore = useModelStore();
 
 function compileLayer({ condition, url }: ConditionalLayerConfig): {
-  checkCondition: Condition<typeof record>;
+  checkCondition: Condition<typeof modelStore.record>;
   condition: string;
   active: Ref<boolean>;
   url: URL;
@@ -29,7 +29,7 @@ function compileLayer({ condition, url }: ConditionalLayerConfig): {
   const resolvedUrl = toAssetUrl(url);
   const { x, y } = extractAssetPosition(resolvedUrl);
   const checkCondition = compile(condition);
-  const active = computed(() => checkCondition(record));
+  const active = computed(() => checkCondition(modelStore.record));
   return {
     checkCondition,
     condition,
