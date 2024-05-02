@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { ElementOf } from 'ts-essentials';
 import type { Ref } from 'vue';
 
 import { computed } from 'vue';
@@ -13,29 +14,28 @@ const {
   getSecondary,
 } = useConfigStore();
 const { description, scoreLabels } = general;
-const { circularity: circularityLabels, coverage: coverageLabels } =
-  scoreLabels;
 
 const modelStore = useModelStore();
 
 interface ScoreInfo {
+  id: string;
   score: Ref<number>;
   primaryLabel: Ref<string>;
   secondaryLabel: Ref<string>;
 }
 
-const circularity: ScoreInfo = {
-  score: computed(() => Scores.circularity(modelStore.record)),
-  primaryLabel: getPrimary(circularityLabels),
-  secondaryLabel: getSecondary(circularityLabels),
-};
-const coverage: ScoreInfo = {
-  score: computed(() => Scores.coverage(modelStore.record)),
-  primaryLabel: getPrimary(coverageLabels),
-  secondaryLabel: getSecondary(coverageLabels),
-};
+const scoreIds = ['circularity', 'coverage'] as const;
 
-const scores = [circularity, coverage];
+function createScoreInfo(id: ElementOf<typeof scoreIds>): ScoreInfo {
+  return {
+    id,
+    score: computed(() => Scores[id](modelStore.record)),
+    primaryLabel: getPrimary(scoreLabels[id]),
+    secondaryLabel: getSecondary(scoreLabels[id]),
+  };
+}
+
+const scores = scoreIds.map(createScoreInfo);
 
 const fractionDigits = 1;
 const nanScoreText = `–.${''.padEnd(fractionDigits, '–')}`;
@@ -59,7 +59,10 @@ const format = (score: number) => {
           {{ getPrimary(description).value }}
         </td>
       </tr>
-      <template v-for="{ score, primaryLabel, secondaryLabel } in scores">
+      <template
+        v-for="{ id, score, primaryLabel, secondaryLabel } in scores"
+        :key="id"
+      >
         <tr>
           <td class="label-column">
             <div class="primary-text">{{ primaryLabel.value }}&nbsp;</div>
