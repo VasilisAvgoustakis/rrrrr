@@ -87,12 +87,12 @@ const format = (score: number) => {
   display: table;
   table-layout: fixed;
   margin: 44px;
-  width: 376px;
-  height: 376px;
-  background-color: black;
+  width: 395px;
+  height: 395px;
+  background-color: #e10984;
   border-radius: 50%;
   color: white;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1.2;
   text-transform: uppercase;
   white-space: pre;
@@ -108,10 +108,11 @@ const format = (score: number) => {
 
 table {
   border-collapse: separate;
-  border-spacing: 1ex 1.2em;
+  border-spacing: 1ex 0.5em;
 }
 
 .header {
+  padding-top: 0.5em;
   padding-bottom: 1em;
 }
 
@@ -134,7 +135,7 @@ td {
 
 .score-value {
   display: inline-block;
-  width: 19ex;
+  width: 8ex;
   text-align: right;
 }
 </style>
