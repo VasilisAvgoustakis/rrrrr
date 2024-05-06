@@ -92,7 +92,7 @@ const BasicSlotGroupSchema = suretype(
       type: v.string().enum('basic').required(),
       label: I18nSchema.required(),
       assets: SlotGroupAssetSchema.required(),
-      slots: v.array(MarkerSlotSchema).required(),
+      markerSlots: v.array(MarkerSlotSchema).required(),
       parameterTransformIds: v.array(v.string()).required(),
     })
     .additional(false),

@@ -98,7 +98,7 @@ export interface BasicSlotGroupConfig {
   type: 'basic';
   label: I18nConfig;
   assets: SlotGroupAssetConfig;
-  slots: MarkerSlotConfig[];
+  markerSlots: MarkerSlotConfig[];
   parameterTransformIds: string[];
 }
 

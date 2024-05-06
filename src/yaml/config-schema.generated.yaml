@@ -290,7 +290,7 @@ definitions:
         $ref: '#/definitions/I18nConfig'
       assets:
         $ref: '#/definitions/SlotGroupAssetConfig'
-      slots:
+      markerSlots:
         type: array
         items:
           $ref: '#/definitions/MarkerSlotConfig'
@@ -303,7 +303,7 @@ definitions:
       - type
       - label
       - assets
-      - slots
+      - markerSlots
       - parameterTransformIds
     additionalProperties: false
   CardSlotConfig:
