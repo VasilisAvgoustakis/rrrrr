@@ -136,7 +136,7 @@ export interface EventCardSlotGroupConfig {
   cards: CardConfig[];
 }
 
-export type SlotGroup =
+export type SlotGroupConfig =
   | BasicSlotGroupConfig
   | ActionCardSlotGroupConfig
   | EventCardSlotGroupConfig;
@@ -147,7 +147,7 @@ export interface InteractionConfig {
   eventCardMaxDelayMs: number;
   eventCardMinDurationMs: number;
   eventCardMaxDurationMs: number;
-  slotGroups: SlotGroup[];
+  slotGroups: SlotGroupConfig[];
 }
 
 export type ModelVisualizationLayerConfig = 'modelVisualization';

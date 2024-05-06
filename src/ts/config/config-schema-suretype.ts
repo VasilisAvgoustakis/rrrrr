@@ -137,7 +137,7 @@ const EventCardSlotGroupSchema = suretype(
 );
 
 const SlotGroupSchema = suretype(
-  { name: 'SlotGroup' },
+  { name: 'SlotGroupConfig' },
   v.anyOf([
     BasicSlotGroupSchema,
     ActionCardSlotGroupSchema,
