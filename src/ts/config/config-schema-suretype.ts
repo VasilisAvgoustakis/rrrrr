@@ -161,9 +161,12 @@ const ConditionalLayerSchema = suretype(
     .required(),
 );
 
-const LayersSchema = v.array(
+const LayerSchema = suretype(
+  { name: 'LayerConfig' },
   v.anyOf([ModelVisualizationLayerSchema, ConditionalLayerSchema]),
 );
+
+const LayersSchema = suretype({ name: 'LayersConfig' }, v.array(LayerSchema));
 
 const GeneralSchema = suretype(
   { name: 'GeneralConfig' },

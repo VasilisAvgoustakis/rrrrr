@@ -33,11 +33,7 @@ properties:
   interaction:
     $ref: '#/definitions/InteractionConfig'
   layers:
-    type: array
-    items:
-      anyOf:
-        - $ref: '#/definitions/ModelVisualizationLayerConfig'
-        - $ref: '#/definitions/ConditionalLayerConfig'
+    $ref: '#/definitions/LayersConfig'
 required:
   - general
   - model
@@ -457,3 +453,11 @@ definitions:
       - url
       - condition
     additionalProperties: false
+  LayerConfig:
+    anyOf:
+      - $ref: '#/definitions/ModelVisualizationLayerConfig'
+      - $ref: '#/definitions/ConditionalLayerConfig'
+  LayersConfig:
+    type: array
+    items:
+      $ref: '#/definitions/LayerConfig'

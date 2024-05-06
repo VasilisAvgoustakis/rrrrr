@@ -157,6 +157,12 @@ export interface ConditionalLayerConfig {
   condition: string;
 }
 
+export type LayerConfig =
+  | ModelVisualizationLayerConfig
+  | ConditionalLayerConfig;
+
+export type LayersConfig = LayerConfig[];
+
 export interface Config {
   general: GeneralConfig;
   model: {
@@ -169,5 +175,5 @@ export interface Config {
   };
   parameterTransforms: ParameterTransformConfig[];
   interaction: InteractionConfig;
-  layers: (ModelVisualizationLayerConfig | ConditionalLayerConfig)[];
+  layers: LayersConfig;
 }
