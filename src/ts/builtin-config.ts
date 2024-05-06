@@ -1,5 +1,3 @@
-import type { DeepReadonly } from 'ts-essentials';
-
 const CONFIG_BASE_URL = new URL('./config/', window.location.href);
 const CONFIG_FILENAMES = [
   'general.yaml',
