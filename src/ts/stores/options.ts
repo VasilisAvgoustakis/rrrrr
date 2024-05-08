@@ -30,6 +30,8 @@ const markerSlotLabels =
 
 const autoReset = (searchParams.get('autoReset') ?? 'true') === 'true';
 
+export const sentryDsn = searchParams.get('sentryDsn');
+
 export const useOptionStore = defineStore('options', () => {
   const result = {
     useTuioMarkers,
@@ -42,6 +44,7 @@ export const useOptionStore = defineStore('options', () => {
     highlightDerivatives,
     markerSlotLabels,
     autoReset,
+    sentryDsn,
   };
 
   return result as DeepReadonly<typeof result>;

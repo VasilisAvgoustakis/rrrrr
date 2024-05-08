@@ -9,6 +9,10 @@ import { ConfigLoader } from './config/config-loader';
 import { documentReady } from './util/document-ready';
 import { CONFIG_URLS, CONFIG_INJECTION_KEY } from './builtin-config';
 import { DuplicateIdError } from './config/config-additional-checks';
+import { initSentry } from './util/sentry-io';
+import { sentryDsn } from './stores/options';
+
+if (sentryDsn !== null) initSentry(sentryDsn);
 
 // eslint-disable-next-line no-lone-blocks
 {
