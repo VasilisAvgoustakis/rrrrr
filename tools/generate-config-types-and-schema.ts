@@ -16,6 +16,7 @@ import {
 
 const CONFIG_SCHEMA_TYPESCRIPT_FILENAME =
   'src/ts/config/config-schema-types.generated.ts';
+const CONFIG_SCHEMA_JSON_FILENAME = 'specs/config-schema.generated.json';
 const CONFIG_SCHEMA_YAML_FILENAME = 'specs/config-schema.generated.yaml';
 
 async function main() {
@@ -51,7 +52,7 @@ async function main() {
   );
   writeFileSync(CONFIG_SCHEMA_TYPESCRIPT_FILENAME, formattedTypeScriptString);
 
-  // generate and export JSON schema, but use YAML syntax
+  // generate JSON schema
   const { definitions: jsonSchemaDefinitions } = inputJsonSchema;
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
@@ -74,6 +75,7 @@ async function main() {
     definitions: jsonSchemaDefinitionsWithoutConfig,
   };
 
+  // Export JSON schema in JSON syntax
   const outputJsonSchemaJsonString = JSON.stringify(outputJsonSchema, null, 2);
 
   const prettierJsonOptions =
@@ -85,6 +87,7 @@ async function main() {
 
   writeFileSync(CONFIG_SCHEMA_JSON_FILENAME, formattedJsonSchemaJsonString);
 
+  // Export JSON schema in YAML syntax
   const outputJsonSchemaYamlString = yaml.dump(outputJsonSchema);
 
   const prettierYamlOptions =
