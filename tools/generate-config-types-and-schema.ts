@@ -68,22 +68,33 @@ async function main() {
   );
 
   const outputJsonSchema = {
-    $schema: 'http://json-schema.org/draft-07/schema#',
+    $schema: 'http://json-schema.org/draft-07/schema',
     title: CONFIG_SCHEMA_NAME,
     ...configDefinition,
     definitions: jsonSchemaDefinitionsWithoutConfig,
   };
 
-  const outputJsonSchemaString = yaml.dump(outputJsonSchema);
+  const outputJsonSchemaJsonString = JSON.stringify(outputJsonSchema, null, 2);
+
+  const prettierJsonOptions =
+    (await prettier.resolveConfig(CONFIG_SCHEMA_JSON_FILENAME)) ?? undefined;
+  const formattedJsonSchemaJsonString = await prettier.format(
+    outputJsonSchemaJsonString,
+    { parser: 'json', ...prettierJsonOptions },
+  );
+
+  writeFileSync(CONFIG_SCHEMA_JSON_FILENAME, formattedJsonSchemaJsonString);
+
+  const outputJsonSchemaYamlString = yaml.dump(outputJsonSchema);
 
   const prettierYamlOptions =
     (await prettier.resolveConfig(CONFIG_SCHEMA_YAML_FILENAME)) ?? undefined;
-  const formattedJsonSchemaString = await prettier.format(
-    outputJsonSchemaString,
+  const formattedJsonSchemaYamlString = await prettier.format(
+    outputJsonSchemaYamlString,
     { parser: 'yaml', ...prettierYamlOptions },
   );
 
-  writeFileSync(CONFIG_SCHEMA_YAML_FILENAME, formattedJsonSchemaString);
+  writeFileSync(CONFIG_SCHEMA_YAML_FILENAME, formattedJsonSchemaYamlString);
 }
 
 void main();
