@@ -1,12 +1,14 @@
 # Objects
+* [`Asset URL object`](#reference-asseturlobjectconfig)
 * [`Card`](#reference-cardconfig)
 * [`Card slot`](#reference-cardslotconfig)
 * [`General configuration`](#reference-generalconfig)
-* [`Initial parameter values`](#reference-initialparametersconfig)
-* [`Initial stock values`](#reference-initialstocksconfig)
+    * [`Auto reset`](#reference-autoresetconfig)
+    * [`Score labels`](#reference-scorelabelsconfig)
 * [`Interactive elements`](#reference-interactionconfig)
     * [`Slot group`](#reference-slotgroupconfig)
         * [`Action card slot group`](#reference-actioncardslotgroupconfig)
+            * [`slot`](#reference-actioncardslotgroupslotconfig)
         * [`Basic slot group`](#reference-basicslotgroupconfig)
         * [`Event card slot group`](#reference-eventcardslotgroupconfig)
 * [`Internationalized text`](#reference-i18nconfig)
@@ -15,8 +17,12 @@
         * [`Conditionally shown illustration layer`](#reference-conditionallayerconfig)
         * [`Model visualization layer`](#reference-modelvisualizationlayerconfig)
 * [`Marker slot`](#reference-markerslotconfig)
+* [`Model configuration`](#reference-modelconfig)
+    * [`Initial parameter values`](#reference-initialparametersconfig)
+    * [`Initial stock values`](#reference-initialstocksconfig)
 * [`Parameter transformation`](#reference-parametertransformconfig)
 * [`Schema of the app configuration`](#reference-schema-of-the-app-configuration) (root object)
+* [`Simulation configuration`](#reference-simulationconfig)
 * [`Slot group assets`](#reference-slotgroupassetconfig)
 
 
@@ -34,7 +40,7 @@
 |**type**|`string`|| &#10003; Yes|
 |**label**|`I18nConfig`|| &#10003; Yes|
 |**assets**|`SlotGroupAssetConfig`|| &#10003; Yes|
-|**slots**|`object` `[]`|| &#10003; Yes|
+|**slots**|`ActionCardSlotGroupSlotConfig` `[]`|| &#10003; Yes|
 |**cards**|`CardConfig` `[]`|| &#10003; Yes|
 
 Additional properties are not allowed.
@@ -65,13 +71,101 @@ Additional properties are not allowed.
 
 ### ActionCardSlotGroupConfig.slots
 
-* **Type**: `object` `[]`
+* **Type**: `ActionCardSlotGroupSlotConfig` `[]`
 * **Required**:  &#10003; Yes
 
 ### ActionCardSlotGroupConfig.cards
 
 * **Type**: `CardConfig` `[]`
 * **Required**:  &#10003; Yes
+
+
+
+
+---------------------------------------
+<a name="reference-actioncardslotgroupslotconfig"></a>
+## Action card slot group slot
+
+**`Action card slot group slot` Properties**
+
+|   |Type|Description|Required|
+|---|---|---|---|
+|**markerSlot**|`MarkerSlotConfig`|| &#10003; Yes|
+|**cardSlot**|`CardSlotConfig`|| &#10003; Yes|
+
+Additional properties are not allowed.
+
+### ActionCardSlotGroupSlotConfig.markerSlot
+
+* **Type**: `MarkerSlotConfig`
+* **Required**:  &#10003; Yes
+
+### ActionCardSlotGroupSlotConfig.cardSlot
+
+* **Type**: `CardSlotConfig`
+* **Required**:  &#10003; Yes
+
+
+
+
+---------------------------------------
+<a name="reference-asseturlobjectconfig"></a>
+## Asset URL object
+
+**`Asset URL object` Properties**
+
+|   |Type|Description|Required|
+|---|---|---|---|
+|**url**|`string`|| &#10003; Yes|
+
+Additional properties are not allowed.
+
+### AssetUrlObjectConfig.url
+
+* **Type**: `string`
+* **Required**:  &#10003; Yes
+* **Pattern**: `_x[+-]?[0-9]+_y[+-]?[0-9]+\.[a-zA-Z0-9]+$`
+
+
+
+
+---------------------------------------
+<a name="reference-autoresetconfig"></a>
+## Auto reset
+
+**`Auto reset` Properties**
+
+|   |Type|Description|Required|
+|---|---|---|---|
+|**timeoutSeconds**|`number`|| &#10003; Yes|
+|**condition**|`string`|| &#10003; Yes|
+|**title**|`I18nConfig`|| &#10003; Yes|
+|**description**|`I18nConfig`|| &#10003; Yes|
+
+Additional properties are not allowed.
+
+### AutoResetConfig.timeoutSeconds
+
+* **Type**: `number`
+* **Required**:  &#10003; Yes
+* **Minimum**: ` >= 0`
+
+### AutoResetConfig.condition
+
+* **Type**: `string`
+* **Required**:  &#10003; Yes
+
+### AutoResetConfig.title
+
+* **Type**: `I18nConfig`
+* **Required**:  &#10003; Yes
+* **Type of each property**: `string`
+
+### AutoResetConfig.description
+
+* **Type**: `I18nConfig`
+* **Required**:  &#10003; Yes
+* **Type of each property**: `string`
 
 
 
@@ -293,8 +387,8 @@ Additional properties are not allowed.
 |**primaryLanguage**|`string`|| &#10003; Yes|
 |**secondaryLanguage**|`string`|| &#10003; Yes|
 |**description**|`I18nConfig`|| &#10003; Yes|
-|**scoreLabels**|`object`|| &#10003; Yes|
-|**autoReset**|`object`|| &#10003; Yes|
+|**scoreLabels**|`ScoreLabelsConfig`|| &#10003; Yes|
+|**autoReset**|`AutoResetConfig`|| &#10003; Yes|
 
 Additional properties are not allowed.
 
@@ -321,12 +415,12 @@ Additional properties are not allowed.
 
 ### GeneralConfig.scoreLabels
 
-* **Type**: `object`
+* **Type**: `ScoreLabelsConfig`
 * **Required**:  &#10003; Yes
 
 ### GeneralConfig.autoReset
 
-* **Type**: `object`
+* **Type**: `AutoResetConfig`
 * **Required**:  &#10003; Yes
 
 
@@ -704,6 +798,32 @@ Additional properties are not allowed.
 
 
 ---------------------------------------
+<a name="reference-modelconfig"></a>
+## Model configuration
+
+**`Model configuration` Properties**
+
+|   |Type|Description|Required|
+|---|---|---|---|
+|**initialParameters**|`InitialParametersConfig`|| &#10003; Yes|
+|**initialStocks**|`InitialStocksConfig`|| &#10003; Yes|
+
+Additional properties are not allowed.
+
+### ModelConfig.initialParameters
+
+* **Type**: `InitialParametersConfig`
+* **Required**:  &#10003; Yes
+
+### ModelConfig.initialStocks
+
+* **Type**: `InitialStocksConfig`
+* **Required**:  &#10003; Yes
+
+
+
+
+---------------------------------------
 <a name="reference-modelvisualizationlayerconfig"></a>
 ## Model visualization layer
 
@@ -744,8 +864,8 @@ Additional properties are not allowed.
 |   |Type|Description|Required|
 |---|---|---|---|
 |**general**|`GeneralConfig`|| &#10003; Yes|
-|**model**|`object`|| &#10003; Yes|
-|**simulation**|`object`|| &#10003; Yes|
+|**model**|`ModelConfig`|| &#10003; Yes|
+|**simulation**|`SimulationConfig`|| &#10003; Yes|
 |**parameterTransforms**|`ParameterTransformConfig` `[]`|| &#10003; Yes|
 |**interaction**|`InteractionConfig`|| &#10003; Yes|
 |**layers**|`LayersConfig`|| &#10003; Yes|
@@ -759,12 +879,12 @@ Additional properties are not allowed.
 
 ### Schema of the app configuration.model
 
-* **Type**: `object`
+* **Type**: `ModelConfig`
 * **Required**:  &#10003; Yes
 
 ### Schema of the app configuration.simulation
 
-* **Type**: `object`
+* **Type**: `SimulationConfig`
 * **Required**:  &#10003; Yes
 
 ### Schema of the app configuration.parameterTransforms
@@ -788,6 +908,60 @@ Additional properties are not allowed.
 
 
 ---------------------------------------
+<a name="reference-scorelabelsconfig"></a>
+## Score labels
+
+**`Score labels` Properties**
+
+|   |Type|Description|Required|
+|---|---|---|---|
+|**circularity**|`I18nConfig`|| &#10003; Yes|
+|**coverage**|`I18nConfig`|| &#10003; Yes|
+
+Additional properties are not allowed.
+
+### ScoreLabelsConfig.circularity
+
+* **Type**: `I18nConfig`
+* **Required**:  &#10003; Yes
+* **Type of each property**: `string`
+
+### ScoreLabelsConfig.coverage
+
+* **Type**: `I18nConfig`
+* **Required**:  &#10003; Yes
+* **Type of each property**: `string`
+
+
+
+
+---------------------------------------
+<a name="reference-simulationconfig"></a>
+## Simulation configuration
+
+**`Simulation configuration` Properties**
+
+|   |Type|Description|Required|
+|---|---|---|---|
+|**deltaPerSecond**|`number`|| &#10003; Yes|
+|**maxStepSize**|`number`|| &#10003; Yes|
+
+Additional properties are not allowed.
+
+### SimulationConfig.deltaPerSecond
+
+* **Type**: `number`
+* **Required**:  &#10003; Yes
+
+### SimulationConfig.maxStepSize
+
+* **Type**: `number`
+* **Required**:  &#10003; Yes
+
+
+
+
+---------------------------------------
 <a name="reference-slotgroupconfig"></a>
 ## Slot group
 
@@ -801,19 +975,19 @@ Additional properties are not allowed.
 
 |   |Type|Description|Required|
 |---|---|---|---|
-|**markerSlotActive**|`object`|| &#10003; Yes|
-|**markerSlotInactive**|`object`|| &#10003; Yes|
+|**markerSlotActive**|`AssetUrlObjectConfig`|| &#10003; Yes|
+|**markerSlotInactive**|`AssetUrlObjectConfig`|| &#10003; Yes|
 
 Additional properties are not allowed.
 
 ### SlotGroupAssetConfig.markerSlotActive
 
-* **Type**: `object`
+* **Type**: `AssetUrlObjectConfig`
 * **Required**:  &#10003; Yes
 
 ### SlotGroupAssetConfig.markerSlotInactive
 
-* **Type**: `object`
+* **Type**: `AssetUrlObjectConfig`
 * **Required**:  &#10003; Yes
 
 

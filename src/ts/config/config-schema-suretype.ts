@@ -3,9 +3,10 @@ import { stockIds, parameterIds } from '../circular-economy-model';
 
 const POSITIONAL_ASSET_REGEX = /_x[+-]?[0-9]+_y[+-]?[0-9]+\.[a-zA-Z0-9]+$/g;
 const AssetUrlSchema = v.string().matches(POSITIONAL_ASSET_REGEX);
-const AssetUrlObjectSchema = v
-  .object({ url: AssetUrlSchema.required() })
-  .additional(false);
+const AssetUrlObjectSchema = suretype(
+  { name: 'AssetUrlObjectConfig', title: 'Asset URL object' },
+  v.object({ url: AssetUrlSchema.required() }).additional(false),
+);
 
 const I18nSchema = suretype(
   { name: 'I18nConfig', title: 'Internationalized text' },
@@ -98,6 +99,19 @@ const BasicSlotGroupSchema = suretype(
     .additional(false),
 );
 
+const ActionCardSlotGroupSlotSchema = suretype(
+  {
+    name: 'ActionCardSlotGroupSlotConfig',
+    title: 'Action card slot group slot',
+  },
+  v
+    .object({
+      markerSlot: MarkerSlotSchema.required(),
+      cardSlot: CardSlotSchema.required(),
+    })
+    .additional(false),
+);
+
 const ActionCardSlotGroupSchema = suretype(
   { name: 'ActionCardSlotGroupConfig', title: 'Action card slot group' },
   v
@@ -106,16 +120,7 @@ const ActionCardSlotGroupSchema = suretype(
       type: v.string().enum('action-card').required(),
       label: I18nSchema.required(),
       assets: SlotGroupAssetSchema.required(),
-      slots: v
-        .array(
-          v
-            .object({
-              markerSlot: MarkerSlotSchema.required(),
-              cardSlot: CardSlotSchema.required(),
-            })
-            .additional(false),
-        )
-        .required(),
+      slots: v.array(ActionCardSlotGroupSlotSchema).required(),
       cards: v.array(CardSchema).required(),
     })
     .additional(false),
@@ -174,6 +179,28 @@ const LayersSchema = suretype(
   v.array(LayerSchema),
 );
 
+const ScoreLabelsSchema = suretype(
+  { name: 'ScoreLabelsConfig', title: 'Score labels' },
+  v
+    .object({
+      circularity: I18nSchema.required(),
+      coverage: I18nSchema.required(),
+    })
+    .additional(false),
+);
+
+const AutoResetSchema = suretype(
+  { name: 'AutoResetConfig', title: 'Auto reset' },
+  v
+    .object({
+      timeoutSeconds: v.number().gte(0).required(),
+      condition: v.string().required(),
+      title: I18nSchema.required(),
+      description: I18nSchema.required(),
+    })
+    .additional(false),
+);
+
 const GeneralSchema = suretype(
   { name: 'GeneralConfig', title: 'General configuration' },
   v
@@ -182,22 +209,8 @@ const GeneralSchema = suretype(
       primaryLanguage: v.string().required(),
       secondaryLanguage: v.string().required(),
       description: I18nSchema.required(),
-      scoreLabels: v
-        .object({
-          circularity: I18nSchema.required(),
-          coverage: I18nSchema.required(),
-        })
-        .additional(false)
-        .required(),
-      autoReset: v
-        .object({
-          timeoutSeconds: v.number().gte(0).required(),
-          condition: v.string().required(),
-          title: I18nSchema.required(),
-          description: I18nSchema.required(),
-        })
-        .additional(false)
-        .required(),
+      scoreLabels: ScoreLabelsSchema.required(),
+      autoReset: AutoResetSchema.required(),
     })
     .additional(false),
 );
@@ -216,6 +229,26 @@ const InteractionSchema = suretype(
     .additional(false),
 );
 
+const ModelConfigSchema = suretype(
+  { name: 'ModelConfig', title: 'Model configuration' },
+  v
+    .object({
+      initialParameters: InitialParametersSchema.required(),
+      initialStocks: InitialStocksSchema.required(),
+    })
+    .additional(false),
+);
+
+const SimulationConfigSchema = suretype(
+  { name: 'SimulationConfig', title: 'Simulation configuration' },
+  v
+    .object({
+      deltaPerSecond: v.number().required(),
+      maxStepSize: v.number().required(),
+    })
+    .additional(false),
+);
+
 const CONFIG_SCHEMA_NAME = 'Config';
 
 const ConfigSchema = suretype(
@@ -223,20 +256,8 @@ const ConfigSchema = suretype(
   v
     .object({
       general: GeneralSchema.required(),
-      model: v
-        .object({
-          initialParameters: InitialParametersSchema.required(),
-          initialStocks: InitialStocksSchema.required(),
-        })
-        .additional(false)
-        .required(),
-      simulation: v
-        .object({
-          deltaPerSecond: v.number().required(),
-          maxStepSize: v.number().required(),
-        })
-        .additional(false)
-        .required(),
+      model: ModelConfigSchema.required(),
+      simulation: SimulationConfigSchema.required(),
       parameterTransforms: ParameterTransformsSchema.required(),
       interaction: InteractionSchema.required(),
       layers: LayersSchema.required(),
