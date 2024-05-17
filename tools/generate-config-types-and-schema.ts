@@ -16,7 +16,7 @@ import {
 
 const CONFIG_SCHEMA_TYPESCRIPT_FILENAME =
   'src/ts/config/config-schema-types.generated.ts';
-const CONFIG_SCHEMA_YAML_FILENAME = 'src/yaml/config-schema.generated.yaml';
+const CONFIG_SCHEMA_YAML_FILENAME = 'specs/config-schema.generated.yaml';
 
 async function main() {
   const jsonSchemeReader = getJsonSchemaReader();
