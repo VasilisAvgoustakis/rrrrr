@@ -1,5 +1,5 @@
 $schema: http://json-schema.org/draft-07/schema#
-title: Config
+title: Schema of the app configuration
 type: object
 properties:
   general:
@@ -45,10 +45,12 @@ additionalProperties: false
 definitions:
   I18nConfig:
     type: object
+    title: Internationalized text
     additionalProperties:
       type: string
   GeneralConfig:
     type: object
+    title: General configuration
     properties:
       assetBaseDir:
         type: string
@@ -97,6 +99,7 @@ definitions:
     additionalProperties: false
   InitialParametersConfig:
     type: object
+    title: Initial parameter values
     properties:
       abandonExcessRate:
         type: number
@@ -171,6 +174,7 @@ definitions:
     additionalProperties: false
   InitialStocksConfig:
     type: object
+    title: Initial stock values
     properties:
       capacityOfNaturalResources:
         type: number
@@ -220,6 +224,7 @@ definitions:
       - supplyOfRepairedPhones
     additionalProperties: false
   ParameterTransformConfig:
+    title: Parameter transformation
     type: object
     properties:
       id:
@@ -232,6 +237,7 @@ definitions:
     additionalProperties: false
   SlotGroupAssetConfig:
     type: object
+    title: Slot group assets
     properties:
       markerSlotActive:
         type: object
@@ -257,6 +263,7 @@ definitions:
     additionalProperties: false
   MarkerSlotConfig:
     type: object
+    title: Marker slot
     properties:
       id:
         type: string
@@ -274,6 +281,7 @@ definitions:
     additionalProperties: false
   BasicSlotGroupConfig:
     type: object
+    title: Basic slot group
     properties:
       id:
         type: string
@@ -304,6 +312,7 @@ definitions:
     additionalProperties: false
   CardSlotConfig:
     type: object
+    title: Card slot
     properties:
       id:
         type: string
@@ -321,6 +330,7 @@ definitions:
     additionalProperties: false
   CardConfig:
     type: object
+    title: Card
     properties:
       parameterTransformId:
         type: string
@@ -332,6 +342,7 @@ definitions:
     additionalProperties: false
   ActionCardSlotGroupConfig:
     type: object
+    title: Action card slot group
     properties:
       id:
         type: string
@@ -371,6 +382,7 @@ definitions:
     additionalProperties: false
   EventCardSlotGroupConfig:
     type: object
+    title: Event card slot group
     properties:
       id:
         type: string
@@ -403,12 +415,14 @@ definitions:
       - cards
     additionalProperties: false
   SlotGroupConfig:
+    title: Slot group
     anyOf:
       - $ref: '#/definitions/BasicSlotGroupConfig'
       - $ref: '#/definitions/ActionCardSlotGroupConfig'
       - $ref: '#/definitions/EventCardSlotGroupConfig'
   InteractionConfig:
     type: object
+    title: Interactive elements
     properties:
       actionCardDelayMs:
         type: number
@@ -439,9 +453,11 @@ definitions:
     additionalProperties: false
   ModelVisualizationLayerConfig:
     type: string
+    title: Model visualization layer
     enum:
       - modelVisualization
   ConditionalLayerConfig:
+    title: Conditionally shown illustration layer
     type: object
     properties:
       url:
@@ -454,10 +470,12 @@ definitions:
       - condition
     additionalProperties: false
   LayerConfig:
+    title: Illustration or visualization layer
     anyOf:
       - $ref: '#/definitions/ModelVisualizationLayerConfig'
       - $ref: '#/definitions/ConditionalLayerConfig'
   LayersConfig:
     type: array
+    title: Layers of illustrations and visualizations
     items:
       $ref: '#/definitions/LayerConfig'
