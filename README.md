@@ -6,7 +6,7 @@ the ecosystem using a simple multi-compartment model. The user controls the app
 via physical or virtual markers that modify certain parameters of the model.
 
 Check out the
-[interactive demo](https://imaginary.github.io/rrrrr/index.html?pointer=true)
+[interactive demo](https://imaginary.github.io/rrrrr/index.html?tuio=false&pointer=true)
 (tested with Google Chrome 106).
 
 ## Options
