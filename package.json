@@ -1,10 +1,10 @@
 {
-  "name": "circular-economy",
+  "name": "rrrrr",
   "version": "0.0.0",
   "description": "An exhibit simulating certain aspects of a circular economy",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/IMAGINARY/circular-economy.git"
+    "url": "git+https://github.com/IMAGINARY/rrrrr.git"
   },
   "author": {
     "name": "Christian Stussak",
@@ -12,9 +12,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/IMAGINARY/circular-economy/issues"
+    "url": "https://github.com/IMAGINARY/rrrrr/issues"
   },
-  "homepage": "https://github.com/IMAGINARY/circular-economy#readme",
+  "homepage": "https://imaginary.github.io/rrrrr/index.html",
   "source": [
     "src/html/index.html"
   ],
