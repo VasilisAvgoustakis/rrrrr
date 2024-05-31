@@ -116,9 +116,9 @@
     "generate:model-class": "npm-run-all -s convert-insightmaker-model generate:config-schema",
     "check-updates": "npm-check-updates",
     "convert-insightmaker-model": "tsx ./tools/convert-from-insight-maker.ts < src/insight-maker/CircularEconomyOfSmartPhones.InsightMaker > ./src/ts/circular-economy-model.ts; prettier --write ./src/ts/circular-economy-model.ts",
-    "udp-websocket-bridge": "npm run udp-websocket-bridge:node",
-    "udp-websocket-bridge:websocat": "websocat -E -b ws-l:127.0.0.1:3339 udp-l:127.0.0.1:3333",
-    "udp-websocket-bridge:node": "tsx ./tools/udp-websocket-bridge.ts"
+    "udp-websocket-proxy": "npm run udp-websocket-proxy:node",
+    "udp-websocket-proxy:websocat": "websocat -E -b ws-l:127.0.0.1:3339 udp-l:127.0.0.1:3333",
+    "udp-websocket-proxy:node": "tsx ./tools/udp-websocket-bridge.ts"
   },
   "dependencies": {
     "@fontsource/jost": "^5.0.17",
