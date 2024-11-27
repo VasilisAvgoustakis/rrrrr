@@ -29,7 +29,15 @@ function compileLayer({ condition, url }: ConditionalLayerConfig): {
   const resolvedUrl = toAssetUrl(url);
   const { x, y } = extractAssetPosition(resolvedUrl);
   const checkCondition = compile(condition);
-  const active = computed(() => checkCondition(modelStore.record));
+  const active = computed(() => {
+    // If the condition does not depend on the record (e.g. it only depends on some global state like the date),
+    // the reactive elements of modelStore.record will not be accessed and the condition will never be re-evaluated
+    // after the first run. Querying the timestamp of the record object ensures that the condition is re-evaluated
+    // whenever the simulation progresses.
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { t } = modelStore.record;
+    return checkCondition(modelStore.record);
+  });
   return {
     checkCondition,
     condition,
