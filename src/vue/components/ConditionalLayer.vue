@@ -18,13 +18,14 @@ const props = defineProps<{
 const { extractAssetPosition, toAssetUrl } = useConfigStore();
 const modelStore = useModelStore();
 
-function compileLayer({ condition, url }: ConditionalLayerConfig): {
+function compileLayer({ condition, url, reset }: ConditionalLayerConfig): {
   checkCondition: Condition<typeof modelStore.record>;
   condition: string;
   active: Ref<boolean>;
   url: URL;
   x: number;
   y: number;
+  reset: boolean;
 } {
   const resolvedUrl = toAssetUrl(url);
   const { x, y } = extractAssetPosition(resolvedUrl);
@@ -45,6 +46,7 @@ function compileLayer({ condition, url }: ConditionalLayerConfig): {
     url: resolvedUrl,
     x,
     y,
+    reset: reset ?? false, // FIXME: apply the default during config parsing
   };
 }
 
@@ -53,6 +55,7 @@ const compiledLayer = compileLayer(props.layerConfig);
 
 <template>
   <img
+    v-if="!compiledLayer.reset || compiledLayer.active.value"
     :src="compiledLayer.url.href"
     class="positioned-layer"
     :class="{ inactive: !compiledLayer.active.value }"
