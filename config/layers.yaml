@@ -164,3 +164,5 @@ layers:
     condition: 'new Date().getDate() === 25 && (new Date().getMonth()+1) === 2'
   - url: easteregg_pipie_x3277_y510.webp
     condition: 'new Date().getDate() === 14 && (new Date().getMonth()+1) === 3'
+  - slots
+  - scores
