@@ -5,7 +5,7 @@ import { onKeyStroke } from '@vueuse/core';
 import ScaledLetterBox from './ScaledLetterbox.vue';
 import PointerMarkerPanel from './PointerMarkerPanel.vue';
 import TuioMarkerPanel from './TuioMarkerPanel.vue';
-import ScoreTable from './ScoreTable.vue';
+import ScoreLayer from './ScoreLayer.vue';
 import ControlPanel from './ControlPanel.vue';
 import ConditionalLayer from './ConditionalLayer.vue';
 import BasicSlotGroup from './BasicSlotGroup.vue';
@@ -171,13 +171,10 @@ onMounted(() => {
           class="model-visualization"
           :key="`layer-${index}-model-visualization`"
         />
-        <div
+        <ScoreLayer
           v-else-if="layerConfig === BUILTIN_LAYER_NAMES.scores"
           :key="`layer-${index}-scores`"
-        >
-          <ScoreTable class="score-top-left" />
-          <ScoreTable class="score-bottom-right" />
-        </div>
+        />
         <div
           class="slot-panel abs-top-left"
           v-else-if="layerConfig === BUILTIN_LAYER_NAMES.slots"

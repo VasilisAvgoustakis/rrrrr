@@ -166,3 +166,37 @@ layers:
     condition: 'new Date().getDate() === 14 && (new Date().getMonth()+1) === 3'
   - slots
   - scores
+  # Coverage score
+  - url: scores/very-bad_x209_y3.png
+    condition:
+      '(variables.coverageScore >= 0.0 && variables.coverageScore < 0.125) ||
+      variables.coverageScore >= 1.875'
+  - url: scores/bad_x209_y3.png
+    condition:
+      '(variables.coverageScore >= 0.125 && variables.coverageScore < 0.375) ||
+      (variables.coverageScore >= 1.625 && variables.coverageScore < 1.875)'
+  - url: scores/neutral_x209_y3.png
+    condition:
+      '(variables.coverageScore >= 0.375 && variables.coverageScore < 0.625) ||
+      (variables.coverageScore >= 1.375 && variables.coverageScore < 1.625)'
+  - url: scores/good_x209_y3.png
+    condition:
+      '(variables.coverageScore >= 0.625 && variables.coverageScore < 0.875) ||
+      (variables.coverageScore >= 1.125 && variables.coverageScore < 1.375)'
+  - url: scores/very-good_x209_y3.png
+    condition:
+      'variables.coverageScore >= 0.875 && variables.coverageScore < 1.125'
+  # Circularity score
+  - url: scores/very-bad_x3434_y1960.png
+    condition: 'variables.circularityScore < 0.125'
+  - url: scores/bad_x3434_y1960.png
+    condition:
+      'variables.circularityScore >= 0.125 && variables.circularityScore < 0.375'
+  - url: scores/neutral_x3434_y1960.png
+    condition:
+      'variables.circularityScore >= 0.375 && variables.circularityScore < 0.625'
+  - url: scores/good_x3434_y1960.png
+    condition:
+      'variables.circularityScore >= 0.625 && variables.circularityScore < 0.875'
+  - url: scores/very-good_x3434_y1960.png
+    condition: 'variables.circularityScore >= 0.875'
