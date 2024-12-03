@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { ElementOf } from 'ts-essentials';
 import type { Ref } from 'vue';
 
 import { computed } from 'vue';
@@ -24,29 +23,50 @@ interface ScoreInfo {
   secondaryLabel: Ref<string>;
 }
 
-const scoreIds = ['circularity', 'coverage'] as const;
-const scoreCssClasses = {
-  circularity: ['score', 'score-bottom-right'],
-  coverage: ['score', 'score-top-left'],
+const scoreExtraProps = {
+  circularity: {
+    cssClasses: ['score', 'score-bottom-right'],
+    boundaries: {
+      min: { value: 0, string: '<0%' },
+      max: { value: 1, string: '>100%' },
+    },
+  },
+  coverage: {
+    cssClasses: ['score', 'score-top-left'],
+    boundaries: {
+      min: { value: 0, string: '< 0%' },
+      max: { value: 9.99999999999999, string: '> 999%' },
+    },
+  },
+} as const;
+
+type ScoreId = keyof typeof scoreExtraProps;
+type BoundariesType = {
+  min: { value: number; string: string };
+  max: { value: number; string: string };
 };
 
-function createScoreInfo(id: ElementOf<typeof scoreIds>): ScoreInfo {
+function createScoreInfo(id: ScoreId): ScoreInfo {
   return {
     id,
     score: computed(() => Scores[id](modelStore.record)),
     primaryLabel: getPrimary(scoreLabels[id]),
     secondaryLabel: getSecondary(scoreLabels[id]),
-    cssClasses: scoreCssClasses[id],
+    cssClasses: scoreExtraProps[id].cssClasses,
+    boundaries: scoreExtraProps[id].boundaries,
   };
 }
 
-const scores = scoreIds.map(createScoreInfo);
+const scores = Object.keys(scoreExtraProps).map(createScoreInfo);
 
 const fractionDigits = 1;
 const nanScoreText = `–.${''.padEnd(fractionDigits, '–')}`;
-const format = (score: number) => {
-  if (Number.isFinite(score))
+const format = (score: number, boundaries: BoundariesType) => {
+  if (Number.isFinite(score)) {
+    if (score < boundaries.min.value) return boundaries.min.string;
+    if (score > boundaries.max.value) return boundaries.max.string;
     return `${(score * 100).toFixed(fractionDigits)}%`;
+  }
 
   if (score === Number.POSITIVE_INFINITY) return `∞%`;
 
@@ -58,7 +78,14 @@ const format = (score: number) => {
 
 <template>
   <template
-    v-for="{ id, score, primaryLabel, secondaryLabel, cssClasses } in scores"
+    v-for="{
+      id,
+      score,
+      primaryLabel,
+      secondaryLabel,
+      cssClasses,
+      boundaries,
+    } in scores"
     :key="id"
   >
     <div :class="cssClasses">
@@ -67,8 +94,8 @@ const format = (score: number) => {
           <div class="primary-text">{{ primaryLabel.value }}</div>
           <div class="secondary-text">{{ secondaryLabel.value }}</div>
         </div>
-        <div class="primary-text score-value">
-          {{ format(score.value) }}
+        <div class="primary-text score-value" :data-raw-score="score.value">
+          {{ format(score.value, boundaries) }}
         </div>
       </div>
     </div>
