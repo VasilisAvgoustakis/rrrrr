@@ -268,13 +268,13 @@ layers:
   - url: R8_x3122_y817.webp
     condition: 'parameters.userdata.reuse != 3 && parameters.userdata.reuse != 2 && parameters.userdata.reuse != 1'
     reset: true
-  - url: R9_x2841_y955.webp
+  - url: R9_x2907_y845.webp
     condition: 'parameters.userdata.reuse >= 0.5'
     reset: true
-  - url: R10_x2923_y946.webp
+  - url: R10_x2933_y986.webp
     condition: 'parameters.userdata.reuse >= 1.5'
     reset: true
-  - url: R11_x2837_y947.webp
+  - url: R11_x2821_y949.webp
     condition: 'parameters.userdata.reuse >= 2.5'
     reset: true
 #speeech bubbles reduce
