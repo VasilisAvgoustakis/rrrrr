@@ -137,7 +137,7 @@ layers:
   - url: repair_background_x1156_y468.webp
     condition: 'false'
   - url: repair_gangster_x1206_y568.webp
-    condition: 'parameters.userdata.repair >= 1.5'  
+    condition: 'parameters.userdata.repair >= 1.5'
   - url: repair_woman_x1336_y546.webp
     condition: 'flows.acquireRepaired > 20000'
   - url: repair_injection_x1737_y400.webp
@@ -238,9 +238,12 @@ layers:
   - url: scores/very-good_x209_y3.png
     condition:
       'variables.coverageScore >= 0.92172 && variables.coverageScore < 1.07828'
-#speeech bubbles refurbish
+  # Speech bubbles: Refurbish
   - url: R16_x2740_y1284.webp
-    condition: 'parameters.userdata.refurbish != 3 && parameters.userdata.refurbish != 2 && parameters.userdata.refurbish != 1 && stocks.supplyOfHibernatingPhones > 40000'
+    condition:
+      'parameters.userdata.refurbish != 3 && parameters.userdata.refurbish != 2
+      && parameters.userdata.refurbish != 1 && stocks.supplyOfHibernatingPhones
+      > 40000'
     reset: true
   - url: R17_x2526_y1365.webp
     condition: 'parameters.userdata.refurbish >= 0.5'
@@ -251,9 +254,11 @@ layers:
   - url: R19_x2785_y1444.webp
     condition: 'parameters.userdata.refurbish >= 2.5'
     reset: true
-#speeech bubbles repair
+  # Speech bubbles: Repair
   - url: R12_x1745_y275.webp
-    condition: 'parameters.userdata.repair != 3 && parameters.userdata.repair != 2 && parameters.userdata.repair != 1 && stocks.supplyOfBrokenPhones > 40000'
+    condition:
+      'parameters.userdata.repair != 3 && parameters.userdata.repair != 2 &&
+      parameters.userdata.repair != 1 && stocks.supplyOfBrokenPhones > 40000'
     reset: true
   - url: R13_x1395_y415.webp
     condition: 'parameters.userdata.repair >= 0.5'
@@ -264,9 +269,11 @@ layers:
   - url: R15_x1198_y566.webp
     condition: 'parameters.userdata.repair >= 2.5'
     reset: true
-#speeech bubbles reuse
+  # Speech bubbles: Reuse
   - url: R8_x3122_y817.webp
-    condition: 'parameters.userdata.reuse != 3 && parameters.userdata.reuse != 2 && parameters.userdata.reuse != 1'
+    condition:
+      'parameters.userdata.reuse != 3 && parameters.userdata.reuse != 2 &&
+      parameters.userdata.reuse != 1'
     reset: true
   - url: R9_x2907_y845.webp
     condition: 'parameters.userdata.reuse >= 0.5'
@@ -277,9 +284,11 @@ layers:
   - url: R11_x2821_y949.webp
     condition: 'parameters.userdata.reuse >= 2.5'
     reset: true
-#speeech bubbles reduce
+  # Speech bubbles: Reduce
   - url: R2_x1360_y1284.webp
-    condition: 'parameters.userdata.reduce != 3 && parameters.userdata.reduce != 2 && parameters.userdata.reduce != 1'
+    condition:
+      'parameters.userdata.reduce != 3 && parameters.userdata.reduce != 2 &&
+      parameters.userdata.reduce != 1'
     reset: true
   - url: R3_x1275_y1132.webp
     condition: 'parameters.userdata.reduce >= 0.5'
@@ -290,9 +299,11 @@ layers:
   - url: R5_x1019_y996.webp
     condition: 'parameters.userdata.reduce >= 2.5'
     reset: true
-#speeech bubbles recycle
+  # Speech bubbles: Recycle
   - url: R20_x678_y542.webp
-    condition: 'parameters.userdata.recycle != 3 && parameters.userdata.recycle != 2 && parameters.userdata.recycle != 1'
+    condition:
+      'parameters.userdata.recycle != 3 && parameters.userdata.recycle != 2 &&
+      parameters.userdata.recycle != 1'
     reset: true
   - url: R21_x785_y326.webp
     condition: 'parameters.userdata.recycle >= 0.5'
@@ -303,7 +314,7 @@ layers:
   - url: R23_x908_y414.webp
     condition: 'parameters.userdata.recycle >= 2.5'
     reset: true
-#speech bubbles index related
+  # Speech bubbles: Index
   - url: R30_x3330_y1872.webp
     condition: 'variables.circularityScore < 0.078'
     reset: true
@@ -311,13 +322,12 @@ layers:
     condition: 'variables.circularityScore < 0.2'
     reset: true
   - url: R6_x945_y1248.webp
-    condition:
-      '(variables.coverageScore < 0.8 )'
+    condition: '(variables.coverageScore < 0.8 )'
     reset: true
   - url: R7_x901_y1241.webp
     condition: '(variables.coverageScore > 1.4 )'
     reset: true
-#speech bubbles card related
+  # Speech bubbles: Cards
   - url: R28_x2570_y122.webp
     condition: 'typeof parameters.userdata?.event === "undefined"'
     reset: true
@@ -330,7 +340,7 @@ layers:
   - url: R26_x674_y1130.webp
     condition: 'typeof parameters.userdata?.technology === "undefined"'
     reset: true
-#speech bubbles other conditions
+  # Speech bubbles: Other conditions
   - url: R27_x2305_y741.webp
     condition: 'stocks.supplyOfBrokenPhones <= 40000'
     reset: true
