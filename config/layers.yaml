@@ -320,7 +320,9 @@ layers:
     reset: true
   # Speech bubbles: Index
   - url: speech bubbles/R30_x3330_y1872.webp
-    condition: 'variables.circularityScore < 0.078'
+    # Disable speech bubble overlapping with the circularity score until a better solution is found
+    condition: 'false'
+    # condition: 'variables.circularityScore < 0.078'
     reset: true
   - url: speech bubbles/R31_x485_y1584.webp
     condition: 'variables.circularityScore < 0.2'
